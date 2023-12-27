@@ -1,4 +1,4 @@
-package br.com.slmtecnologia;
+package com.slmtecnologia;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -1,4 +1,4 @@
-package br.com.slmtecnologia.controller.exceptions;
+package com.slmtecnologia.controller.exceptions;
 
 import java.io.Serializable;
 import java.util.Date;
