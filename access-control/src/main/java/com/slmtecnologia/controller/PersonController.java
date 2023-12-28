@@ -91,7 +91,7 @@ public class PersonController {
             @ApiResponse(description = "Internal Error", responseCode = "500", content = @Content),
         }
     )
-    public ResponseEntity<PersonDto> updatePerson(@PathVariable Long id, @RequestBody PersonDto updatedPersonDto) {
+    public ResponseEntity<PersonDto> updatePerson(@PathVariable Long id, @RequestBody @Valid PersonDto updatedPersonDto) {
         return new ResponseEntity<>(personService.updatePerson(id, updatedPersonDto), HttpStatus.OK);
     }
 
