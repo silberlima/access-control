@@ -22,6 +22,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class PersonControllerJsonTest extends AbstractIntegrationTest {
 
+    private static final String BASE_PATH = "/api/person";
     private static RequestSpecification specification;
     private static ObjectMapper objectMapper;
 
@@ -37,8 +38,8 @@ public class PersonControllerJsonTest extends AbstractIntegrationTest {
     void testCreate() throws JsonProcessingException {
         personDto = new PersonDto(null, "João", "14725836900", "teste@gmail.com");
         specification = new RequestSpecBuilder()
-                .addHeader(TestConfigs.HEADER_PARAM_ORIGIN, "http://localhost:8080")
-                .setBasePath("/api/person")
+                .addHeader(TestConfigs.HEADER_PARAM_ORIGIN, TestConfigs.ORIGIN_SLMTECNOLOGIA)
+                .setBasePath(BASE_PATH)
                 .setPort(TestConfigs.SERVER_PORT)
                 .addFilter(new RequestLoggingFilter(LogDetail.ALL))
                 .addFilter(new ResponseLoggingFilter(LogDetail.ALL))

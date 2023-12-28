@@ -11,6 +11,8 @@ public class ExceptionResponse implements Serializable {
     private String message;
     private String datails;
 
+    private String cause;
+
     public ExceptionResponse(Date timestamp, String message, String datails) {
         this.timestamp = timestamp;
         this.message = message;
@@ -28,4 +30,5 @@ public class ExceptionResponse implements Serializable {
     public String getDatails() {
         return datails;
     }
+
 }

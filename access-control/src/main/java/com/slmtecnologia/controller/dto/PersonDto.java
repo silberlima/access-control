@@ -1,6 +1,11 @@
 package com.slmtecnologia.controller.dto;
 
-public record PersonDto(Long id, String name, String cpf, String email) {
+import jakarta.validation.constraints.NotBlank;
+
+public record PersonDto(Long id,
+                        @NotBlank(message = "Campo nome é obrigatório") String name,
+                        @NotBlank(message = "Campo CPF é obrigatório")String cpf,
+                        String email) {
 
 }
 
