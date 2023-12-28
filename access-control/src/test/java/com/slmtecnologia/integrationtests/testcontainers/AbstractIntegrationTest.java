@@ -1,4 +1,4 @@
-package com.slmtecnologia.integrationtestes.testcontainers;
+package com.slmtecnologia.integrationtests.testcontainers;
 
 import org.springframework.context.ApplicationContextInitializer;
 import org.springframework.context.ConfigurableApplicationContext;

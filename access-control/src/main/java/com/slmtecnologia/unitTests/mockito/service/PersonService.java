@@ -36,9 +36,7 @@ public class PersonService implements IPersonService {
     }
     @Override
     public PersonDto createPerson(PersonDto personDto) {
-        if(Objects.isNull(personDto)){
-            throw new RequiredObjectIsNullException();
-        }
+        if(Objects.isNull(personDto)) throw new RequiredObjectIsNullException();
         Person person = PersonMapper.dtoToEntity(personDto);
         return PersonMapper.entityToDto(personRepository.save(person));
     }

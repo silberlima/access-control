@@ -1,7 +1,7 @@
-package com.slmtecnologia.integrationtestes.testcontainers.swagger;
+package com.slmtecnologia.integrationtests.testcontainers.swagger;
 
 import com.slmtecnologia.configs.TestConfigs;
-import com.slmtecnologia.integrationtestes.testcontainers.AbstractIntegrationTest;
+import com.slmtecnologia.integrationtests.testcontainers.AbstractIntegrationTest;
 import static io.restassured.RestAssured.given;
 
 import static org.junit.jupiter.api.Assertions.*;
