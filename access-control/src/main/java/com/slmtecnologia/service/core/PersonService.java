@@ -1,4 +1,4 @@
-package com.slmtecnologia.unitTests.mockito.service;
+package com.slmtecnologia.service.core;
 
 import com.slmtecnologia.controller.dto.PersonDto;
 import com.slmtecnologia.controller.exceptions.RequiredObjectIsNullException;
