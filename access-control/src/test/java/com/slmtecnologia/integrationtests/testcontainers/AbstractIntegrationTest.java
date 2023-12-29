@@ -38,7 +38,5 @@ public class AbstractIntegrationTest {
                     (Map) createConnectionConfiguration());
             environment.getPropertySources().addFirst(testcontainers);
         }
-
     }
-
 }

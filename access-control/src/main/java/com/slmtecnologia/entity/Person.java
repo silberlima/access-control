@@ -5,7 +5,9 @@ import jakarta.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
-@Entity(name = "person")
+
+@Entity
+@Table(name = "person")
 public class Person implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -21,6 +23,7 @@ public class Person implements Serializable {
     private String cpf;
     @Column(nullable = false, length = 80)
     private String email;
+
     public Person(Long id, String name, String cpf, String email) {
         this.id = id;
         this.name = name;
@@ -68,7 +71,6 @@ public class Person implements Serializable {
     public void setCpf(String cpf) {
         this.cpf = cpf;
     }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

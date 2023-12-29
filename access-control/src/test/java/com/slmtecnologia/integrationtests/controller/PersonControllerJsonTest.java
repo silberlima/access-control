@@ -56,7 +56,7 @@ public class PersonControllerJsonTest extends AbstractIntegrationTest {
         var content =  given().spec(specification)
                 .contentType(TestConfigs.CONTENT_TYPE_JSON)
                     .body(personDto)
-                    .when()
+                .when()
                     .post()
                 .then()
                     .statusCode(201)
