@@ -1,4 +1,4 @@
-package com.slmtecnologia.entity;
+package com.slmtecnologia.repository.entity;
 
 import jakarta.persistence.*;
 
@@ -51,6 +51,7 @@ public class Person implements Serializable {
         this.city = city;
         this.zipCode = zipCode;
     }
+
     public Person(String name, String cpf, String email) {
         this.name = name;
         this.cpf = cpf;

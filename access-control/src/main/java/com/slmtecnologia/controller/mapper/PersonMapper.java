@@ -2,13 +2,13 @@ package com.slmtecnologia.controller.mapper;
 
 import com.slmtecnologia.controller.dto.PersonDetailDto;
 import com.slmtecnologia.controller.dto.PersonDto;
-import com.slmtecnologia.entity.Person;
+import com.slmtecnologia.repository.entity.Person;
 
 import java.util.Objects;
 
 public class PersonMapper {
 
-    private PersonMapper() { }a
+    private PersonMapper() { }
 
     public static Person dtoToEntity(PersonDto dto){
         if(Objects.isNull(dto)){ return null;}
@@ -27,10 +27,10 @@ public class PersonMapper {
                 );
     }
 
-    public static Person dtoToEntity(Long id, PersonDto dto){
-        if(Objects.isNull(dto)){ return null;}
+    public static Person dtoToEntity(Person entity, PersonDto dto){
+        if(Objects.isNull(dto)){return null;}
 
-        return new Person(id,
+        return new Person(entity.getId(),
                 dto.name(),
                 dto.socialName(),
                 dto.fatherName(),

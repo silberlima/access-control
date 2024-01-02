@@ -1,6 +1,6 @@
 package com.slmtecnologia.unitTests.mockito.service;
 
-import com.slmtecnologia.entity.Person;
+import com.slmtecnologia.repository.entity.Person;
 import com.slmtecnologia.repository.PersonRepository;
 import com.slmtecnologia.service.core.PersonService;
 import org.junit.jupiter.api.BeforeEach;

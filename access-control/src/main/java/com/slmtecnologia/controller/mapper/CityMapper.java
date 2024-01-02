@@ -1,7 +1,7 @@
 package com.slmtecnologia.controller.mapper;
 
 import com.slmtecnologia.controller.dto.CityDto;
-import com.slmtecnologia.entity.City;
+import com.slmtecnologia.repository.entity.City;
 
 import java.util.Objects;
 

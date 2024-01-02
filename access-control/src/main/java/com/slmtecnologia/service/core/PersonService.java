@@ -5,8 +5,8 @@ import com.slmtecnologia.controller.dto.PersonDto;
 import com.slmtecnologia.controller.exceptions.RequiredObjectIsNullException;
 import com.slmtecnologia.controller.exceptions.ResourceNotFoundException;
 import com.slmtecnologia.controller.mapper.PersonMapper;
-import com.slmtecnologia.entity.City;
-import com.slmtecnologia.entity.Person;
+import com.slmtecnologia.repository.entity.City;
+import com.slmtecnologia.repository.entity.Person;
 import com.slmtecnologia.repository.CityRepository;
 import com.slmtecnologia.repository.PersonRepository;
 import com.slmtecnologia.service.IPersonService;
@@ -46,6 +46,7 @@ public class PersonService implements IPersonService {
     @Override
     public PersonDetailDto createPerson(PersonDto personDto) {
         if(Objects.isNull(personDto)) throw new RequiredObjectIsNullException();
+
         Person person = PersonMapper.dtoToEntity(personDto);
 
         if(Objects.nonNull(personDto.cityId())){
@@ -63,11 +64,12 @@ public class PersonService implements IPersonService {
         var entity = personRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException(RESOURCE_NOT_FOUND));
 
-        var personToSave = PersonMapper.dtoToEntity(entity.getId(), updatedPersonDto);
+        var personToSave = PersonMapper.dtoToEntity(entity, updatedPersonDto);
         personToSave.setCity(entity.getCity());
-        if(Objects.nonNull(entity.getCity()) &&
-                Objects.nonNull(updatedPersonDto.cityId()) &&
-                !entity.getCity().getId().equals(updatedPersonDto.cityId())){
+
+        if((Objects.nonNull(entity.getCity()) && Objects.nonNull(updatedPersonDto.cityId()) && !entity.getCity().getId().equals(updatedPersonDto.cityId()))
+            || (Objects.isNull(entity.getCity()) && Objects.nonNull(updatedPersonDto.cityId())) ) {
+
             City city = cityRepository.findById(updatedPersonDto.cityId())
                     .orElseThrow(() -> new ResourceNotFoundException(CITY_NOT_FOUND));
 

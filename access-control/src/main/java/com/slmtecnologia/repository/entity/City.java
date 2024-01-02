@@ -1,4 +1,4 @@
-package com.slmtecnologia.entity;
+package com.slmtecnologia.repository.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
