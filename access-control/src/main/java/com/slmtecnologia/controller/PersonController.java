@@ -1,5 +1,6 @@
 package com.slmtecnologia.controller;
 
+import com.slmtecnologia.controller.dto.PersonDetailDto;
 import com.slmtecnologia.controller.dto.PersonDto;
 import com.slmtecnologia.service.IPersonService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -61,7 +62,7 @@ public class PersonController {
             @ApiResponse(description = "Internal Error", responseCode = "500", content = @Content),
         }
     )
-    public ResponseEntity<PersonDto> getPersonById(@PathVariable Long id) {
+    public ResponseEntity<PersonDetailDto> getPersonById(@PathVariable Long id) {
         return new ResponseEntity<>(personService.getPersonById(id), HttpStatus.OK);
     }
 
@@ -75,7 +76,7 @@ public class PersonController {
             @ApiResponse(description = "Internal Error", responseCode = "500", content = @Content),
         }
     )
-    public ResponseEntity<PersonDto> createPerson(@RequestBody @Valid PersonDto personDto) {
+    public ResponseEntity<PersonDetailDto> createPerson(@RequestBody @Valid PersonDto personDto) {
         return new ResponseEntity<>(personService.createPerson(personDto), HttpStatus.CREATED);
     }
 
@@ -90,7 +91,7 @@ public class PersonController {
             @ApiResponse(description = "Internal Error", responseCode = "500", content = @Content),
         }
     )
-    public ResponseEntity<PersonDto> updatePerson(@PathVariable Long id, @RequestBody @Valid PersonDto updatedPersonDto) {
+    public ResponseEntity<PersonDetailDto> updatePerson(@PathVariable Long id, @RequestBody @Valid PersonDto updatedPersonDto) {
         return new ResponseEntity<>(personService.updatePerson(id, updatedPersonDto), HttpStatus.OK);
     }
 
