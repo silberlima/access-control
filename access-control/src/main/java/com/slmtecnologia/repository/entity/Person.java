@@ -38,20 +38,6 @@ public class Person implements Serializable {
     private City city;
     private String zipCode;
 
-    public Person(Long id, String name, String socialName, String fatherName, String motherName, String cpf, LocalDate birthDate, String email, String street, City city, String zipCode) {
-        this.id = id;
-        this.name = name;
-        this.socialName = socialName;
-        this.fatherName = fatherName;
-        this.motherName = motherName;
-        this.cpf = cpf;
-        this.birthDate = birthDate;
-        this.email = email;
-        this.street = street;
-        this.city = city;
-        this.zipCode = zipCode;
-    }
-
     public Person(String name, String cpf, String email) {
         this.name = name;
         this.cpf = cpf;

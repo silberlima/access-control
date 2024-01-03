@@ -13,35 +13,19 @@ public class PersonMapper {
     public static Person dtoToEntity(PersonDto dto){
         if(Objects.isNull(dto)){ return null;}
 
-        return new Person(dto.id(),
-                    dto.name(),
-                    dto.socialName(),
-                    dto.fatherName(),
-                    dto.motherName(),
-                    dto.cpf(),
-                    dto.birthDate(),
-                    dto.email(),
-                    dto.street(),
-                    null,
-                    dto.zipCode()
-                );
+        var person = PersonMapper.toEntityWithoutId(dto);
+        person.setId(dto.id());
+
+        return person;
     }
 
     public static Person dtoToEntity(Person entity, PersonDto dto){
         if(Objects.isNull(dto)){return null;}
 
-        return new Person(entity.getId(),
-                dto.name(),
-                dto.socialName(),
-                dto.fatherName(),
-                dto.motherName(),
-                dto.cpf(),
-                dto.birthDate(),
-                dto.email(),
-                dto.street(),
-                null,
-                dto.zipCode()
-        );
+        var person = PersonMapper.toEntityWithoutId(dto);
+        person.setId(entity.getId());
+
+        return person;
     }
 
     public static PersonDetailDto entityToDetailDto(Person entity){
@@ -76,6 +60,20 @@ public class PersonMapper {
                 Objects.nonNull(entity.getCity()) ? entity.getCity().getId() : null,
                 entity.getZipCode()
         );
+    }
+
+    private static Person toEntityWithoutId(PersonDto dto){
+        Person person = new Person();
+        person.setName(dto.name());
+        person.setSocialName(dto.socialName());
+        person.setFatherName(dto.fatherName());
+        person.setMotherName(dto.motherName());
+        person.setCpf(dto.cpf());
+        person.setBirthDate(dto.birthDate());
+        person.setEmail(dto.email());
+        person.setStreet(dto.street());
+        person.setZipCode(dto.zipCode());
+        return person;
     }
 
 
