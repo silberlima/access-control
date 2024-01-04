@@ -7,7 +7,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
-@Table(name = "city",schema = "access_control")
+@Table(name = "city")
 public class City implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
