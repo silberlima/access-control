@@ -2,14 +2,9 @@
 server:
   port: 8888 #set your port
 # Spring Boot configuration
+
 cors:
   originPatterns: http://localhost:3000,http://localhost:8080
-
-security:
-  jwt:
-    token:
-      secret-key: 53ccr37
-      expire-length: 3600000
 
 spring:
   profiles:
