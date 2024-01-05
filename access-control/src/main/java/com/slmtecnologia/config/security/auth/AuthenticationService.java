@@ -62,7 +62,7 @@ public class AuthenticationService {
                 .lastName(request.getLastname())
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
-                .role(Role.USER)
+                .role(request.getRole())
                 .build();
         if(repository.findByEmail(user.getEmail()).isPresent()){
             throw new RequiredObjectIsNullException("User already exists");

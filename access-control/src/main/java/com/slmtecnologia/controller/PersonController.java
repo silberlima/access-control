@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,6 +22,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/person")
 @Tag(name = "People", description = "Endpoints for Managing Peoples")
+@PreAuthorize("hasRole('ADMIN')")
 public class PersonController {
 
     private final IPersonService personService;
@@ -47,6 +49,7 @@ public class PersonController {
             @ApiResponse(description = "Internal Error", responseCode = "500", content = @Content),
         }
     )
+    @PreAuthorize("hasAuthority('person:read')")
     public ResponseEntity<List<PersonDto>> getAllPeople() {
         return new ResponseEntity<>(personService.getAllPeople(), HttpStatus.OK);
     }
