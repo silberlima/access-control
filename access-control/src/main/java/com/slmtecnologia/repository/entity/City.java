@@ -22,7 +22,7 @@ public class City implements Serializable {
     @Column(name = "ibge_code")
     private String ibgeCode;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "acronym")
     private State state;
 
