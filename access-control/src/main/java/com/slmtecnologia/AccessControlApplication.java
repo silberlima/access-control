@@ -30,7 +30,7 @@ public class AccessControlApplication {
 					.password("password")
 					.role(ADMIN)
 					.build();
-			System.out.println("Admin token: " + service.register(admin).getAccessToken());
+//			System.out.println("Admin token: " + service.register(admin).getAccessToken());
 
 			var manager = RegisterRequest.builder()
 					.firstName("Admin")
@@ -39,7 +39,7 @@ public class AccessControlApplication {
 					.password("password")
 					.role(MANAGER)
 					.build();
-			System.out.println("Manager token: " + service.register(manager).getAccessToken());
+//			System.out.println("Manager token: " + service.register(manager).getAccessToken());
 
 		};
 	}

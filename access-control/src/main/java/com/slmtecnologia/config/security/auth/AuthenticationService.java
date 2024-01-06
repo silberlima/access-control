@@ -5,7 +5,6 @@ import com.slmtecnologia.config.security.config.JwtService;
 import com.slmtecnologia.config.security.token.Token;
 import com.slmtecnologia.config.security.token.TokenRepository;
 import com.slmtecnologia.config.security.token.TokenType;
-import com.slmtecnologia.config.security.user.Role;
 import com.slmtecnologia.config.security.user.User;
 import com.slmtecnologia.config.security.user.UserRepository;
 import com.slmtecnologia.controller.exceptions.RequiredObjectIsNullException;
@@ -81,7 +80,7 @@ public class AuthenticationService {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         request.getEmail(),
-                        request.getEmail()
+                        request.getPassword()
                 )
         );
         var user = repository.findByEmail(request.getEmail())
