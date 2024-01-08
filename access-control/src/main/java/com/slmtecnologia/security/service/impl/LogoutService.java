@@ -1,6 +1,6 @@
-package com.slmtecnologia.config.security.config;
+package com.slmtecnologia.security.service.impl;
 
-import com.slmtecnologia.config.security.token.TokenRepository;
+import com.slmtecnologia.security.repository.TokenRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;

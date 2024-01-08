@@ -1,6 +1,6 @@
 package com.slmtecnologia.config.autiding;
 
-import com.slmtecnologia.config.security.user.User;
+import com.slmtecnologia.security.model.entity.User;
 import org.springframework.data.domain.AuditorAware;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;

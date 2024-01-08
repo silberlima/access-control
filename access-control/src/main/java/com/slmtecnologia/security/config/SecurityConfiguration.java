@@ -1,4 +1,4 @@
-package com.slmtecnologia.config.security.config;
+package com.slmtecnologia.security.config;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -13,8 +13,8 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.logout.LogoutHandler;
 
-import static com.slmtecnologia.config.security.user.Role.ADMIN;
-import static com.slmtecnologia.config.security.user.Role.PERSON;
+import static com.slmtecnologia.security.model.enuns.Role.ADMIN;
+import static com.slmtecnologia.security.model.enuns.Role.PERSON;
 import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
 @Configuration
 @EnableWebSecurity

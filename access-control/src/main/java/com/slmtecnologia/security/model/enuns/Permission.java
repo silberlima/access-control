@@ -1,4 +1,4 @@
-package com.slmtecnologia.config.security.user;
+package com.slmtecnologia.security.model.enuns;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

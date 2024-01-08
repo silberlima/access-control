@@ -1,18 +1,18 @@
 package com.slmtecnologia;
 
-import com.slmtecnologia.config.security.auth.AuthenticationService;
-import com.slmtecnologia.config.security.auth.RegisterRequest;
+import com.slmtecnologia.security.service.impl.AuthenticationService;
+import com.slmtecnologia.security.model.dto.RegisterRequest;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
-import static com.slmtecnologia.config.security.user.Role.ADMIN;
-import static com.slmtecnologia.config.security.user.Role.PERSON;
+import static com.slmtecnologia.security.model.enuns.Role.ADMIN;
+import static com.slmtecnologia.security.model.enuns.Role.PERSON;
 
 @SpringBootApplication
-@EnableJpaAuditing(auditorAwareRef = "ʋ")
+@EnableJpaAuditing(auditorAwareRef = "auditorAware")
 public class AccessControlApplication {
 
 	public static void main(String[] args) {

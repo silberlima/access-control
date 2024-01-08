@@ -1,5 +1,6 @@
-package com.slmtecnologia.config.security.user;
+package com.slmtecnologia.security.repository;
 
+import com.slmtecnologia.security.model.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

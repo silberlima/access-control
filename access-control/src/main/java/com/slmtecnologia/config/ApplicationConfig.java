@@ -1,7 +1,7 @@
-package com.slmtecnologia.config.security.config;
+package com.slmtecnologia.config;
 
 import com.slmtecnologia.config.autiding.ApplicationAuditAware;
-import com.slmtecnologia.config.security.user.UserRepository;
+import com.slmtecnologia.security.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

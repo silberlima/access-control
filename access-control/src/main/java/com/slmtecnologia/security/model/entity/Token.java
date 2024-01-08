@@ -1,6 +1,6 @@
-package com.slmtecnologia.config.security.token;
+package com.slmtecnologia.security.model.entity;
 
-import com.slmtecnologia.config.security.user.User;
+import com.slmtecnologia.security.model.enuns.TokenType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
