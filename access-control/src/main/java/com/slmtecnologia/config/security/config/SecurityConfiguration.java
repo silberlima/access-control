@@ -13,18 +13,8 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.logout.LogoutHandler;
 
-
-import static org.springframework.http.HttpMethod.*;
-import static com.slmtecnologia.config.security.user.Permission.ADMIN_CREATE;
-import static com.slmtecnologia.config.security.user.Permission.ADMIN_DELETE;
-import static com.slmtecnologia.config.security.user.Permission.ADMIN_READ;
-import static com.slmtecnologia.config.security.user.Permission.ADMIN_UPDATE;
-import static com.slmtecnologia.config.security.user.Permission.MANAGER_CREATE;
-import static com.slmtecnologia.config.security.user.Permission.MANAGER_DELETE;
-import static com.slmtecnologia.config.security.user.Permission.MANAGER_READ;
-import static com.slmtecnologia.config.security.user.Permission.MANAGER_UPDATE;
 import static com.slmtecnologia.config.security.user.Role.ADMIN;
-import static com.slmtecnologia.config.security.user.Role.MANAGER;
+import static com.slmtecnologia.config.security.user.Role.PERSON;
 import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
 @Configuration
 @EnableWebSecurity
@@ -57,11 +47,7 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(req ->
                         req.requestMatchers(WHITE_LIST_URL)
                                 .permitAll()
-                                .requestMatchers(API_PERSON).hasAnyRole(ADMIN.name(), MANAGER.name())
-                                .requestMatchers(GET, API_PERSON).hasAnyAuthority(ADMIN_READ.name(), MANAGER_READ.name())
-                                .requestMatchers(POST, API_PERSON).hasAnyAuthority(ADMIN_CREATE.name(), MANAGER_CREATE.name())
-                                .requestMatchers(PUT, API_PERSON).hasAnyAuthority(ADMIN_UPDATE.name(), MANAGER_UPDATE.name())
-                                .requestMatchers(DELETE, API_PERSON).hasAnyAuthority(ADMIN_DELETE.name(), MANAGER_DELETE.name())
+                                .requestMatchers(API_PERSON).hasAnyRole(ADMIN.name(), PERSON.name())
                                 .anyRequest()
                                 .authenticated()
                 )

@@ -65,6 +65,7 @@ public class PersonController {
             @ApiResponse(description = "Internal Error", responseCode = "500", content = @Content),
         }
     )
+    @PreAuthorize("hasAuthority('person:read')")
     public ResponseEntity<PersonDetailDto> getPersonById(@PathVariable Long id) {
         return new ResponseEntity<>(personService.getPersonById(id), HttpStatus.OK);
     }
@@ -79,6 +80,7 @@ public class PersonController {
             @ApiResponse(description = "Internal Error", responseCode = "500", content = @Content),
         }
     )
+    @PreAuthorize("hasAuthority('person:create')")
     public ResponseEntity<PersonDetailDto> createPerson(@RequestBody @Valid PersonDto personDto) {
         return new ResponseEntity<>(personService.createPerson(personDto), HttpStatus.CREATED);
     }
@@ -94,6 +96,7 @@ public class PersonController {
             @ApiResponse(description = "Internal Error", responseCode = "500", content = @Content),
         }
     )
+    @PreAuthorize("hasAuthority('person:update')")
     public ResponseEntity<PersonDetailDto> updatePerson(@PathVariable Long id, @RequestBody @Valid PersonDto updatedPersonDto) {
         return new ResponseEntity<>(personService.updatePerson(id, updatedPersonDto), HttpStatus.OK);
     }
@@ -108,6 +111,7 @@ public class PersonController {
             @ApiResponse(description = "Internal Error", responseCode = "500", content = @Content),
         }
     )
+    @PreAuthorize("hasAuthority('person:delete')")
     public ResponseEntity<Void> deletePerson(@PathVariable Long id) {
         personService.deletePerson(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

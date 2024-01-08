@@ -1,14 +1,21 @@
 package com.slmtecnologia.repository.entity;
 
 import jakarta.persistence.*;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 
 @Entity
 @Table(name = "person")
+@EntityListeners(AuditingEntityListener.class)
 public class Person implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -37,6 +44,22 @@ public class Person implements Serializable {
     @JoinColumn(name = "cityId")
     private City city;
     private String zipCode;
+
+    @CreatedDate
+    @Column(nullable = false, updatable = false)
+    private LocalDateTime createDate;
+
+    @CreatedBy
+    @Column(nullable = false, updatable = false)
+    private Integer createBy;
+
+    @LastModifiedDate
+    @Column(insertable = false)
+    private LocalDateTime lastModifiedDate;
+
+    @LastModifiedBy
+    @Column(insertable = false)
+    private Integer lastModifiedBy;
 
     public Person(Long id, String name, String socialName, String fatherName, String motherName, String cpf, LocalDate birthDate, String email, String street, City city, String zipCode) {
         this.id = id;

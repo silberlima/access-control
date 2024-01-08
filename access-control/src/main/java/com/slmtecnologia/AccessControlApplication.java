@@ -6,11 +6,13 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 import static com.slmtecnologia.config.security.user.Role.ADMIN;
-import static com.slmtecnologia.config.security.user.Role.MANAGER;
+import static com.slmtecnologia.config.security.user.Role.PERSON;
 
 @SpringBootApplication
+@EnableJpaAuditing(auditorAwareRef = "ʋ")
 public class AccessControlApplication {
 
 	public static void main(String[] args) {
@@ -30,16 +32,16 @@ public class AccessControlApplication {
 					.password("password")
 					.role(ADMIN)
 					.build();
-//			System.out.println("Admin token: " + service.register(admin).getAccessToken());
+			System.out.println("Admin token: " + service.register(admin).getAccessToken());
 
 			var manager = RegisterRequest.builder()
-					.firstName("Admin")
-					.lastname("Admin")
-					.email("manager@mail.com")
+					.firstName("Person")
+					.lastname("Name")
+					.email("person@mail.com")
 					.password("password")
-					.role(MANAGER)
+					.role(PERSON)
 					.build();
-//			System.out.println("Manager token: " + service.register(manager).getAccessToken());
+			System.out.println("Person token: " + service.register(manager).getAccessToken());
 
 		};
 	}
