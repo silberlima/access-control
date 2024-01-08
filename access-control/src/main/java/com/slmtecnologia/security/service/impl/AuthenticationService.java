@@ -1,12 +1,14 @@
-package com.slmtecnologia.config.security.auth;
+package com.slmtecnologia.security.service.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.slmtecnologia.config.security.config.JwtService;
-import com.slmtecnologia.config.security.token.Token;
-import com.slmtecnologia.config.security.token.TokenRepository;
-import com.slmtecnologia.config.security.token.TokenType;
-import com.slmtecnologia.config.security.user.User;
-import com.slmtecnologia.config.security.user.UserRepository;
+import com.slmtecnologia.security.model.dto.AuthenticationRequest;
+import com.slmtecnologia.security.model.dto.AuthenticationResponse;
+import com.slmtecnologia.security.model.dto.RegisterRequest;
+import com.slmtecnologia.security.model.entity.Token;
+import com.slmtecnologia.security.repository.TokenRepository;
+import com.slmtecnologia.security.model.enuns.TokenType;
+import com.slmtecnologia.security.model.entity.User;
+import com.slmtecnologia.security.repository.UserRepository;
 import com.slmtecnologia.controller.exceptions.RequiredObjectIsNullException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

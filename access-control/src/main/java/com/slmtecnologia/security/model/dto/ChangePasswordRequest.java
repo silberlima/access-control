@@ -1,4 +1,4 @@
-package com.slmtecnologia.config.security.user;
+package com.slmtecnologia.security.model.dto;
 
 import lombok.Builder;
 import lombok.Getter;

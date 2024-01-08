@@ -1,6 +1,6 @@
-package com.slmtecnologia.config.security.auth;
+package com.slmtecnologia.security.model.dto;
 
-import com.slmtecnologia.config.security.user.Role;
+import com.slmtecnologia.security.model.enuns.Role;
 import lombok.*;
 
 @Data

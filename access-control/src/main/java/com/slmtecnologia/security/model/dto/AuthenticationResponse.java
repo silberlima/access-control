@@ -1,4 +1,4 @@
-package com.slmtecnologia.config.security.auth;
+package com.slmtecnologia.security.model.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;

@@ -1,6 +1,7 @@
-package com.slmtecnologia.config.security.config;
+package com.slmtecnologia.security.config;
 
-import com.slmtecnologia.config.security.token.TokenRepository;
+import com.slmtecnologia.security.repository.TokenRepository;
+import com.slmtecnologia.security.service.impl.JwtService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

@@ -1,5 +1,7 @@
-package com.slmtecnologia.config.security.user;
+package com.slmtecnologia.security.controller;
 
+import com.slmtecnologia.security.model.dto.ChangePasswordRequest;
+import com.slmtecnologia.security.service.impl.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;

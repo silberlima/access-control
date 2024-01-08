@@ -1,4 +1,4 @@
-package com.slmtecnologia.config.security.auth;
+package com.slmtecnologia.security.model.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

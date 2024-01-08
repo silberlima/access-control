@@ -1,5 +1,8 @@
-package com.slmtecnologia.config.security.user;
+package com.slmtecnologia.security.service.impl;
 
+import com.slmtecnologia.security.model.dto.ChangePasswordRequest;
+import com.slmtecnologia.security.model.entity.User;
+import com.slmtecnologia.security.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;

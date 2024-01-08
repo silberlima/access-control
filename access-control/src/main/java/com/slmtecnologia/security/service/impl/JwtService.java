@@ -1,4 +1,4 @@
-package com.slmtecnologia.config.security.config;
+package com.slmtecnologia.security.service.impl;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
