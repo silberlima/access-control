@@ -1,6 +1,6 @@
 package com.slmtecnologia.repository;
 
-import com.slmtecnologia.repository.entity.City;
+import com.slmtecnologia.model.entity.City;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

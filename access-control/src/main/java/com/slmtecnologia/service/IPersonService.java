@@ -1,7 +1,7 @@
 package com.slmtecnologia.service;
 
-import com.slmtecnologia.controller.dto.PersonDetailDto;
-import com.slmtecnologia.controller.dto.PersonDto;
+import com.slmtecnologia.model.dto.PersonDetailDto;
+import com.slmtecnologia.model.dto.PersonDto;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

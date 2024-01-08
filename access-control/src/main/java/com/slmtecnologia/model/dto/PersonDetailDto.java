@@ -1,4 +1,4 @@
-package com.slmtecnologia.controller.dto;
+package com.slmtecnologia.model.dto;
 
 import jakarta.validation.constraints.NotBlank;
 

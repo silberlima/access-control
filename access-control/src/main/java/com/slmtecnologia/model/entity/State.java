@@ -1,4 +1,4 @@
-package com.slmtecnologia.repository.entity;
+package com.slmtecnologia.model.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

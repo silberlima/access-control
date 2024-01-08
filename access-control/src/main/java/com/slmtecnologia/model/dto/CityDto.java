@@ -1,4 +1,4 @@
-package com.slmtecnologia.controller.dto;
+package com.slmtecnologia.model.dto;
 
 public record CityDto(Long id,
                       String name,

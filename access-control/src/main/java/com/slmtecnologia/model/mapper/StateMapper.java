@@ -1,7 +1,7 @@
-package com.slmtecnologia.controller.mapper;
+package com.slmtecnologia.model.mapper;
 
-import com.slmtecnologia.controller.dto.StateDto;
-import com.slmtecnologia.repository.entity.State;
+import com.slmtecnologia.model.dto.StateDto;
+import com.slmtecnologia.model.entity.State;
 
 public class StateMapper {
 

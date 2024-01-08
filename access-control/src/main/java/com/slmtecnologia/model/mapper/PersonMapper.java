@@ -1,8 +1,8 @@
-package com.slmtecnologia.controller.mapper;
+package com.slmtecnologia.model.mapper;
 
-import com.slmtecnologia.controller.dto.PersonDetailDto;
-import com.slmtecnologia.controller.dto.PersonDto;
-import com.slmtecnologia.repository.entity.Person;
+import com.slmtecnologia.model.dto.PersonDetailDto;
+import com.slmtecnologia.model.dto.PersonDto;
+import com.slmtecnologia.model.entity.Person;
 
 import java.util.Objects;
 

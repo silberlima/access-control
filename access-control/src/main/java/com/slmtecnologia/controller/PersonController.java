@@ -1,7 +1,7 @@
 package com.slmtecnologia.controller;
 
-import com.slmtecnologia.controller.dto.PersonDetailDto;
-import com.slmtecnologia.controller.dto.PersonDto;
+import com.slmtecnologia.model.dto.PersonDetailDto;
+import com.slmtecnologia.model.dto.PersonDto;
 import com.slmtecnologia.service.IPersonService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;

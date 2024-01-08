@@ -1,12 +1,12 @@
 package com.slmtecnologia.service.core;
 
-import com.slmtecnologia.controller.dto.PersonDetailDto;
-import com.slmtecnologia.controller.dto.PersonDto;
+import com.slmtecnologia.model.dto.PersonDetailDto;
+import com.slmtecnologia.model.dto.PersonDto;
 import com.slmtecnologia.controller.exceptions.RequiredObjectIsNullException;
 import com.slmtecnologia.controller.exceptions.ResourceNotFoundException;
-import com.slmtecnologia.controller.mapper.PersonMapper;
-import com.slmtecnologia.repository.entity.City;
-import com.slmtecnologia.repository.entity.Person;
+import com.slmtecnologia.model.mapper.PersonMapper;
+import com.slmtecnologia.model.entity.City;
+import com.slmtecnologia.model.entity.Person;
 import com.slmtecnologia.repository.CityRepository;
 import com.slmtecnologia.repository.PersonRepository;
 import com.slmtecnologia.service.IPersonService;
