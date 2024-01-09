@@ -25,10 +25,6 @@ spring:
     database: postgresql
     open-in-view: false
     generate-ddl: true
-#springdoc:
-#  pathsToMatch: /api/**
-#  swagger-ui:
-#    user-root-path: true
 
 application:
   security:

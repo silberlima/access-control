@@ -1,4 +1,4 @@
-package com.slmtecnologia.security.service.impl;
+package com.slmtecnologia.security.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.slmtecnologia.security.model.dto.AuthenticationRequest;

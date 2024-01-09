@@ -1,6 +1,6 @@
 package com.slmtecnologia;
 
-import com.slmtecnologia.security.service.impl.AuthenticationService;
+import com.slmtecnologia.security.service.AuthenticationService;
 import com.slmtecnologia.security.model.dto.RegisterRequest;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -25,6 +25,7 @@ public class AccessControlApplication {
 			AuthenticationService service
 	) {
 		return args -> {
+
 			var admin = RegisterRequest.builder()
 					.firstName("Admin")
 					.lastname("Admin")

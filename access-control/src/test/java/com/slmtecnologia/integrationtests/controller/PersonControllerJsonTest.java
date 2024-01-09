@@ -6,6 +6,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.slmtecnologia.configs.TestConfigs;
 import com.slmtecnologia.integrationtests.dto.PersonDto;
 import com.slmtecnologia.integrationtests.testcontainers.AbstractIntegrationTest;
+import com.slmtecnologia.security.model.dto.AuthenticationRequest;
+import com.slmtecnologia.security.model.dto.AuthenticationResponse;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.filter.log.LogDetail;
 import io.restassured.filter.log.RequestLoggingFilter;
@@ -36,25 +38,46 @@ public class PersonControllerJsonTest extends AbstractIntegrationTest {
         personDto = new PersonDto();
     }
 
-
     private void mockPerson(){
         personDto.setCpf(CPF);
         personDto.setEmail(EMAIL);
         personDto.setName(NAME);
     }
+
     @Test
-    @Order(1)
-    void testCreate() throws JsonProcessingException {
-        mockPerson();
+    @Order(0)
+    void authorization() throws JsonProcessingException {
+        AuthenticationRequest user = new AuthenticationRequest("person@mail.com", "passoword");
+
+        var accessToken = given()
+                .basePath("api/auth/authenticate")
+                    .port(TestConfigs.SERVER_PORT)
+                    .contentType(TestConfigs.CONTENT_TYPE_JSON)
+                .body(user)
+                    .when()
+                .post()
+                    .then()
+                        .statusCode(200)
+                            .extract()
+                            .body()
+                                .as(AuthenticationResponse.class)
+                            .getAccessToken();
         specification = new RequestSpecBuilder()
-                .addHeader(TestConfigs.HEADER_PARAM_ORIGIN, TestConfigs.ORIGIN_LOCAL)
+                .addHeader(TestConfigs.HEADER_PARAM_AUTHORIZATION, "Bearer "+accessToken)
                 .setBasePath(BASE_PATH)
                 .setPort(TestConfigs.SERVER_PORT)
                 .addFilter(new RequestLoggingFilter(LogDetail.ALL))
                 .addFilter(new ResponseLoggingFilter(LogDetail.ALL))
                 .build();
+
+    }
+    @Test
+    @Order(1)
+    void testCreate() throws JsonProcessingException {
+        mockPerson();
         var content =  given().spec(specification)
                 .contentType(TestConfigs.CONTENT_TYPE_JSON)
+                .header(TestConfigs.HEADER_PARAM_ORIGIN, TestConfigs.ORIGIN_LOCAL)
                     .body(personDto)
                 .when()
                     .post()
@@ -75,15 +98,9 @@ public class PersonControllerJsonTest extends AbstractIntegrationTest {
     @Order(2)
     void testCreateWithWrongOrigin()  {
 
-        specification = new RequestSpecBuilder()
-                .addHeader(TestConfigs.HEADER_PARAM_ORIGIN, TestConfigs.ORIGIN_SLMTECNOLOGIA)
-                .setBasePath(BASE_PATH)
-                .setPort(TestConfigs.SERVER_PORT)
-                .addFilter(new RequestLoggingFilter(LogDetail.ALL))
-                .addFilter(new ResponseLoggingFilter(LogDetail.ALL))
-                .build();
         var content =  given().spec(specification)
                 .contentType(TestConfigs.CONTENT_TYPE_JSON)
+                .header(TestConfigs.HEADER_PARAM_ORIGIN, TestConfigs.ORIGIN_SLMTECNOLOGIA)
                     .body(personDto)
                 .when()
                     .post()
@@ -102,15 +119,9 @@ public class PersonControllerJsonTest extends AbstractIntegrationTest {
     @Order(3)
     void testFindById() throws JsonProcessingException {
 
-        specification = new RequestSpecBuilder()
-                .addHeader(TestConfigs.HEADER_PARAM_ORIGIN, TestConfigs.ORIGIN_LOCAL)
-                .setBasePath(BASE_PATH)
-                .setPort(TestConfigs.SERVER_PORT)
-                .addFilter(new RequestLoggingFilter(LogDetail.ALL))
-                .addFilter(new ResponseLoggingFilter(LogDetail.ALL))
-                .build();
         var content =  given().spec(specification)
                 .contentType(TestConfigs.CONTENT_TYPE_JSON)
+                .header(TestConfigs.HEADER_PARAM_ORIGIN, TestConfigs.ORIGIN_LOCAL)
                     .pathParam("id", personDto.getId())
                 .when()
                     .get("{id}")
@@ -132,15 +143,10 @@ public class PersonControllerJsonTest extends AbstractIntegrationTest {
     @Order(4)
     void testFindByIdWithWrong()  {
 
-        specification = new RequestSpecBuilder()
-                .addHeader(TestConfigs.HEADER_PARAM_ORIGIN, TestConfigs.ORIGIN_SLMTECNOLOGIA)
-                .setBasePath(BASE_PATH)
-                .setPort(TestConfigs.SERVER_PORT)
-                .addFilter(new RequestLoggingFilter(LogDetail.ALL))
-                .addFilter(new ResponseLoggingFilter(LogDetail.ALL))
-                .build();
+
         var content =  given().spec(specification)
                 .contentType(TestConfigs.CONTENT_TYPE_JSON)
+                .header(TestConfigs.HEADER_PARAM_ORIGIN, TestConfigs.ORIGIN_LOCAL)
                 .pathParam("id", personDto.getId())
                 .when()
                     .get("{id}")

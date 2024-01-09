@@ -1,20 +1,21 @@
 package com.slmtecnologia.service.core;
 
-import com.slmtecnologia.model.dto.PersonDetailDto;
-import com.slmtecnologia.model.dto.PersonDto;
 import com.slmtecnologia.controller.exceptions.RequiredObjectIsNullException;
 import com.slmtecnologia.controller.exceptions.ResourceNotFoundException;
-import com.slmtecnologia.model.mapper.PersonMapper;
+import com.slmtecnologia.model.dto.PersonDetailDto;
+import com.slmtecnologia.model.dto.PersonDto;
 import com.slmtecnologia.model.entity.City;
 import com.slmtecnologia.model.entity.Person;
+import com.slmtecnologia.model.mapper.PersonMapper;
 import com.slmtecnologia.repository.CityRepository;
 import com.slmtecnologia.repository.PersonRepository;
 import com.slmtecnologia.service.IPersonService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Objects;
 
 @Service
@@ -30,15 +31,13 @@ public class PersonService implements IPersonService {
         this.cityRepository = cityRepository;
     }
     @Override
-    public List<PersonDto> getAllPeople() {
-        return personRepository.findAll()
-                .stream()
-                .map(PersonMapper::entityToDto)
-                .toList();
+    public Page<PersonDto> findAll(Pageable pageable) {
+        var personPage = personRepository.findAll(pageable);
+        return personPage.map(PersonMapper::entityToDto);
     }
     @Transactional
     @Override
-    public PersonDetailDto getPersonById(Long id) {
+    public PersonDetailDto findById(Long id) {
         return PersonMapper.entityToDetailDto(personRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException(RESOURCE_NOT_FOUND)));
     }
@@ -57,6 +56,7 @@ public class PersonService implements IPersonService {
         }
         return PersonMapper.entityToDetailDto(personRepository.save(person));
     }
+
 
     @Transactional
     @Override
@@ -85,6 +85,12 @@ public class PersonService implements IPersonService {
         var personEntity = personRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException(RESOURCE_NOT_FOUND));
         personRepository.deleteById(personEntity.getId());
+    }
+
+    @Override
+    public Page<PersonDto> findByName(String name, Pageable pageable){
+        var personPage = personRepository.findByName(name, pageable);
+        return personPage.map(PersonMapper::entityToDto);
     }
 
 }

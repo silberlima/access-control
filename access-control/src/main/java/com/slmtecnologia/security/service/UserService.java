@@ -1,6 +1,7 @@
-package com.slmtecnologia.security.service.impl;
+package com.slmtecnologia.security.service;
 
 import com.slmtecnologia.security.model.dto.ChangePasswordRequest;
+import com.slmtecnologia.security.model.dto.UserResponse;
 import com.slmtecnologia.security.model.entity.User;
 import com.slmtecnologia.security.repository.UserRepository;
 import lombok.AllArgsConstructor;
@@ -9,6 +10,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.security.Principal;
+import java.util.List;
 
 @Service
 @AllArgsConstructor
@@ -33,4 +35,15 @@ public class UserService {
         user.setPassword(passwordEncoder.encode(request.getNewPassword()));
         repository.save(user);
     }
+
+    public List<UserResponse> findAll() {
+        return repository.findAll().stream()
+                .map(user -> UserResponse.builder()
+                        .email(user.getEmail())
+                        .firstName(user.getFirstName())
+                        .lastname(user.getLastName())
+                        .build())
+                .toList();
+    }
+
 }

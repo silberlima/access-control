@@ -37,12 +37,12 @@ class PersonServiceTest {
     }
 
     @Test
-    void getPersonById() {
+    void findByID() {
         Long id = 1L;
         personEntity.setId(id);
         when(repository.findById(id)).thenReturn(Optional.ofNullable(personEntity));
 
-        var result =  service.getPersonById(id);
+        var result =  service.findById(id);
 
         assertNotNull(result);
         assertEquals(result, personEntity);

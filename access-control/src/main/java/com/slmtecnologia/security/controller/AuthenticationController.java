@@ -2,7 +2,7 @@ package com.slmtecnologia.security.controller;
 
 import com.slmtecnologia.security.model.dto.AuthenticationRequest;
 import com.slmtecnologia.security.model.dto.AuthenticationResponse;
-import com.slmtecnologia.security.service.impl.AuthenticationService;
+import com.slmtecnologia.security.service.AuthenticationService;
 import com.slmtecnologia.security.model.dto.RegisterRequest;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
