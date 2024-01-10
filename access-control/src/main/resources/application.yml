@@ -4,9 +4,12 @@ server:
 
 cors:
   originPatterns: http://localhost:3000,http://localhost:8080
+file:
+  upload-dir: /Users/silbersousalima/projects/access-control/access-control/UploadDir
 
 # Spring Boot configuration
 spring:
+
   profiles:
     active: development
   # Database
@@ -25,6 +28,12 @@ spring:
     database: postgresql
     open-in-view: false
     generate-ddl: true
+  servlet:
+    multipart:
+      enabled: true
+      file-size-threshold: 2KB
+      max-file-size: 200MB
+      max-request-size: 215MB
 
 application:
   security:
