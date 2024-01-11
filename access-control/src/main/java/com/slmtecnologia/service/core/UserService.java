@@ -1,25 +1,28 @@
-package com.slmtecnologia.security.service;
+package com.slmtecnologia.service.core;
 
-import com.slmtecnologia.security.model.dto.ChangePasswordRequest;
-import com.slmtecnologia.security.model.dto.UserResponse;
-import com.slmtecnologia.security.model.entity.User;
-import com.slmtecnologia.security.repository.UserRepository;
+import com.slmtecnologia.model.dto.ChangePasswordRequest;
+import com.slmtecnologia.model.dto.UserResponse;
+import com.slmtecnologia.model.entity.User;
+import com.slmtecnologia.repository.UserRepository;
+import com.slmtecnologia.service.IUserService;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.security.Principal;
-import java.util.List;
 
 @Service
 @AllArgsConstructor
-public class UserService {
+public class UserService implements IUserService {
 
     private final PasswordEncoder passwordEncoder;
 
     private final UserRepository repository;
 
+    @Override
     public void changePassword(ChangePasswordRequest request, Principal connectedUser) {
 
         var user = (User)((UsernamePasswordAuthenticationToken) connectedUser).getPrincipal();
@@ -36,14 +39,14 @@ public class UserService {
         repository.save(user);
     }
 
-    public List<UserResponse> findAll() {
-        return repository.findAll().stream()
-                .map(user -> UserResponse.builder()
-                        .email(user.getEmail())
-                        .firstName(user.getFirstName())
-                        .lastname(user.getLastName())
-                        .build())
-                .toList();
+    @Override
+    public Page<UserResponse> findByName(String name, Pageable pageable) {
+        var users = repository.findByName(name, pageable);
+        return users.map(user -> UserResponse.builder()
+                .email(user.getEmail())
+                .firstName(user.getFirstName())
+                .lastname(user.getLastName())
+                .build());
     }
 
 }

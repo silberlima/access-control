@@ -3,8 +3,11 @@ package com.slmtecnologia.controller;
 import com.slmtecnologia.model.dto.UploadFileResponseDto;
 import com.slmtecnologia.service.core.FileStorageService;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.annotation.Nullable;
 import jakarta.servlet.http.HttpServletRequest;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
+import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -16,20 +19,19 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Logger;
-import java.util.stream.Collectors;
 
 @Tag(name = "File Endpoint")
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/api/file")
 public class FileController {
 
     private Logger logger = Logger.getLogger(FileController.class.getName());
 
-    @Autowired
-    private FileStorageService service;
+    private final FileStorageService service;
 
     @PostMapping("/uploadFile")
-    public UploadFileResponseDto uploadFile(@RequestParam("file") MultipartFile file){
+    public UploadFileResponseDto uploadFile(@NotNull @Valid @RequestParam("file") MultipartFile file){
         var filename = service.storeFile(file);
         String fileDownloadUri = ServletUriComponentsBuilder
                 .fromCurrentContextPath()
@@ -45,7 +47,7 @@ public class FileController {
         return Arrays.asList(files)
                 .stream()
                 .map(this::uploadFile)
-                .collect(Collectors.toList());
+                .toList();
 
     }
 

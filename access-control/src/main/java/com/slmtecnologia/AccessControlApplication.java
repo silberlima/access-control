@@ -1,17 +1,19 @@
 package com.slmtecnologia;
 
-import com.slmtecnologia.security.service.AuthenticationService;
-import com.slmtecnologia.security.model.dto.RegisterRequest;
+import com.slmtecnologia.service.core.AuthenticationService;
+import com.slmtecnologia.model.dto.RegisterRequest;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
-import static com.slmtecnologia.security.model.enuns.Role.ADMIN;
-import static com.slmtecnologia.security.model.enuns.Role.PERSON;
+import static com.slmtecnologia.model.enuns.Role.ADMIN;
+import static com.slmtecnologia.model.enuns.Role.PERSON;
 
 @SpringBootApplication
+@Slf4j
 @EnableJpaAuditing(auditorAwareRef = "auditorAware")
 public class AccessControlApplication {
 
@@ -26,23 +28,21 @@ public class AccessControlApplication {
 	) {
 		return args -> {
 
-			var admin = RegisterRequest.builder()
-					.firstName("Admin")
-					.lastname("Admin")
-					.email("admin@mail.com")
-					.password("password")
-					.role(ADMIN)
-					.build();
-			System.out.println("Admin token: " + service.register(admin).getAccessToken());
+			var admin = new RegisterRequest(
+					"Admin",
+					"Admin",
+					"admin@mail.com",
+					"password",
+					ADMIN);
+			log.info("Admin token: " + service.register(admin).getAccessToken());
 
-			var manager = RegisterRequest.builder()
-					.firstName("Person")
-					.lastname("Name")
-					.email("person@mail.com")
-					.password("password")
-					.role(PERSON)
-					.build();
-			System.out.println("Person token: " + service.register(manager).getAccessToken());
+			var manager = new RegisterRequest(
+					"Person",
+					"Person",
+					"person@mail.com",
+					"password",
+					PERSON);
+			log.info("Person token: " + service.register(manager).getAccessToken());
 
 		};
 	}

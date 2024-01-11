@@ -1,8 +1,8 @@
-package com.slmtecnologia.security.controller;
+package com.slmtecnologia.controller;
 
-import com.slmtecnologia.security.model.dto.ChangePasswordRequest;
-import com.slmtecnologia.security.model.dto.UserResponse;
-import com.slmtecnologia.security.service.UserService;
+import com.slmtecnologia.model.dto.ChangePasswordRequest;
+import com.slmtecnologia.model.dto.UserResponse;
+import com.slmtecnologia.service.IUserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -10,6 +10,10 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +21,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
-import java.util.List;
 
 @RestController
 @RequestMapping("api/users")
@@ -26,10 +29,10 @@ import java.util.List;
 @PreAuthorize("hasRole('ADMIN')")
 public class UserController {
 
-    private final UserService userService;
+    private final IUserService userService;
 
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    @Operation(summary = "Find all Users", description = "Find all Users",
+    @GetMapping(value = "/findByName/{firstName}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "Find Users by name", description = "Find Users by name",
             tags = {"Users"}, responses = {
             @ApiResponse(description = "Success", responseCode = "200",
                     content = {
@@ -46,8 +49,17 @@ public class UserController {
     }
     )
     @PreAuthorize("hasAuthority('user:read')")
-    public ResponseEntity<List<UserResponse>> findAll() {
-        return new ResponseEntity<>(userService.findAll(), HttpStatus.OK);
+    public ResponseEntity<Page<UserResponse>> findByName(
+            @PathVariable(value = "firstName") String firstName,
+            @RequestParam(value = "page", defaultValue = "1") Integer page,
+            @RequestParam(value = "size", defaultValue = "10") Integer size,
+            @RequestParam(value = "direction", defaultValue = "asc") String direction
+    ) {
+        var sortDirection = direction.equalsIgnoreCase("desc") ? Sort.Direction.DESC : Sort.Direction.ASC;
+
+        Pageable pageable = PageRequest.of(page, size, Sort.by(sortDirection, "firstName"));
+
+        return new ResponseEntity<>(userService.findByName(firstName, pageable), HttpStatus.OK);
     }
     @PatchMapping(produces = MediaType.APPLICATION_JSON_VALUE,
                   consumes = MediaType.APPLICATION_JSON_VALUE)

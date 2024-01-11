@@ -1,6 +1,10 @@
 package com.slmtecnologia.model.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -13,6 +17,10 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "person")
 @EntityListeners(AuditingEntityListener.class)
@@ -61,127 +69,4 @@ public class Person implements Serializable {
     @Column(insertable = false)
     private Integer lastModifiedBy;
 
-    public Person(Long id, String name, String socialName, String fatherName, String motherName, String cpf, LocalDate birthDate, String email, String street, City city, String zipCode) {
-        this.id = id;
-        this.name = name;
-        this.socialName = socialName;
-        this.fatherName = fatherName;
-        this.motherName = motherName;
-        this.cpf = cpf;
-        this.birthDate = birthDate;
-        this.email = email;
-        this.street = street;
-        this.city = city;
-        this.zipCode = zipCode;
-    }
-
-    public Person(String name, String cpf, String email) {
-        this.name = name;
-        this.cpf = cpf;
-        this.email = email;
-    }
-
-    public Person() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getCpf() {
-        return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
-
-    public String getSocialName() {
-        return socialName;
-    }
-
-    public void setSocialName(String socialName) {
-        this.socialName = socialName;
-    }
-
-    public String getFatherName() {
-        return fatherName;
-    }
-
-    public void setFatherName(String fatherName) {
-        this.fatherName = fatherName;
-    }
-
-    public String getMotherName() {
-        return motherName;
-    }
-
-    public void setMotherName(String motherName) {
-        this.motherName = motherName;
-    }
-
-    public LocalDate getBirthDate() {
-        return birthDate;
-    }
-
-    public void setBirthDate(LocalDate birthDate) {
-        this.birthDate = birthDate;
-    }
-
-    public String getStreet() {
-        return street;
-    }
-
-    public void setStreet(String street) {
-        this.street = street;
-    }
-
-    public City getCity() {
-        return city;
-    }
-
-    public void setCity(City city) {
-        this.city = city;
-    }
-
-    public String getZipCode() {
-        return zipCode;
-    }
-
-    public void setZipCode(String zipCode) {
-        this.zipCode = zipCode;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Person person = (Person) o;
-        return Objects.equals(id, person.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
 }

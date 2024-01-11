@@ -1,4 +1,4 @@
-package com.slmtecnologia.security.model.dto;
+package com.slmtecnologia.model.dto;
 
 import lombok.Builder;
 import lombok.Getter;

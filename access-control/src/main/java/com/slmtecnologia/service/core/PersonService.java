@@ -11,7 +11,7 @@ import com.slmtecnologia.repository.CityRepository;
 import com.slmtecnologia.repository.PersonRepository;
 import com.slmtecnologia.service.IPersonService;
 import jakarta.transaction.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -19,17 +19,14 @@ import org.springframework.stereotype.Service;
 import java.util.Objects;
 
 @Service
+@RequiredArgsConstructor
 public class PersonService implements IPersonService {
 
     private  static final String RESOURCE_NOT_FOUND = "Recurso não encontrado!";
     private  static final String CITY_NOT_FOUND = "Cidade não encontrada!";
     private final PersonRepository personRepository;
     private final CityRepository cityRepository;
-    @Autowired
-    public PersonService(PersonRepository personRepository, CityRepository cityRepository){
-        this.personRepository = personRepository;
-        this.cityRepository = cityRepository;
-    }
+
     @Override
     public Page<PersonDto> findAll(Pageable pageable) {
         var personPage = personRepository.findAll(pageable);

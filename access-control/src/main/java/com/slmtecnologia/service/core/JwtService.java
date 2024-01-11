@@ -1,4 +1,4 @@
-package com.slmtecnologia.security.service;
+package com.slmtecnologia.service.core;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

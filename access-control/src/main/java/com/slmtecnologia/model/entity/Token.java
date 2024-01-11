@@ -1,6 +1,6 @@
-package com.slmtecnologia.security.model.entity;
+package com.slmtecnologia.model.entity;
 
-import com.slmtecnologia.security.model.enuns.TokenType;
+import com.slmtecnologia.model.enuns.TokenType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -15,12 +15,16 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Token {
+public class Token implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue

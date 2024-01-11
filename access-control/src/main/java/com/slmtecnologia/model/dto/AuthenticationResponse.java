@@ -1,4 +1,4 @@
-package com.slmtecnologia.security.model.dto;
+package com.slmtecnologia.model.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;

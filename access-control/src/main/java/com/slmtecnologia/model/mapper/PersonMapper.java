@@ -13,35 +13,35 @@ public class PersonMapper {
     public static Person dtoToEntity(PersonDto dto){
         if(Objects.isNull(dto)){ return null;}
 
-        return new Person(dto.id(),
-                    dto.name(),
-                    dto.socialName(),
-                    dto.fatherName(),
-                    dto.motherName(),
-                    dto.cpf(),
-                    dto.birthDate(),
-                    dto.email(),
-                    dto.street(),
-                    null,
-                    dto.zipCode()
-                );
+        return Person.builder()
+                .id(dto.id())
+                .name(dto.name())
+                .socialName(dto.socialName())
+                .fatherName(dto.fatherName())
+                .motherName(dto.motherName())
+                .cpf(dto.cpf())
+                .birthDate(dto.birthDate())
+                .email(dto.email())
+                .street(dto.street())
+                .zipCode(dto.zipCode())
+                .build();
     }
 
     public static Person dtoToEntity(Person entity, PersonDto dto){
         if(Objects.isNull(dto)){return null;}
 
-        return new Person(entity.getId(),
-                dto.name(),
-                dto.socialName(),
-                dto.fatherName(),
-                dto.motherName(),
-                dto.cpf(),
-                dto.birthDate(),
-                dto.email(),
-                dto.street(),
-                null,
-                dto.zipCode()
-        );
+        return Person.builder()
+                .id(entity.getId())
+                .name(dto.name())
+                .socialName(dto.socialName())
+                .fatherName(dto.fatherName())
+                .motherName(dto.motherName())
+                .cpf(dto.cpf())
+                .birthDate(dto.birthDate())
+                .email(dto.email())
+                .street(dto.street())
+                .zipCode(dto.zipCode())
+                .build();
     }
 
     public static PersonDetailDto entityToDetailDto(Person entity){

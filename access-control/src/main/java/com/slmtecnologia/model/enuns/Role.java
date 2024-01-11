@@ -1,4 +1,4 @@
-package com.slmtecnologia.security.model.enuns;
+package com.slmtecnologia.model.enuns;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -24,7 +24,11 @@ public enum Role {
                     Permission.PERSON_READ,
                     Permission.PERSON_UPDATE,
                     Permission.PERSON_DELETE,
-                    Permission.PERSON_CREATE
+                    Permission.PERSON_CREATE,
+                    Permission.USER_READ,
+                    Permission.USER_UPDATE,
+                    Permission.USER_DELETE,
+                    Permission.USER_CREATE
             )
     ),
     PERSON(

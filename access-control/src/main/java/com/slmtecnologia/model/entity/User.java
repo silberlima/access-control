@@ -1,6 +1,6 @@
-package com.slmtecnologia.security.model.entity;
+package com.slmtecnologia.model.entity;
 
-import com.slmtecnologia.security.model.enuns.Role;
+import com.slmtecnologia.model.enuns.Role;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
