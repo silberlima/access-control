@@ -27,26 +27,26 @@ public class UserService implements IUserService {
 
         var user = (User)((UsernamePasswordAuthenticationToken) connectedUser).getPrincipal();
 
-        if(passwordEncoder.matches(passwordEncoder.encode(request.getCurrentPassword()), user.getPassword())){
+        if(passwordEncoder.matches(passwordEncoder.encode(request.currentPassword()), user.getPassword())){
             throw new IllegalStateException("Wrong password");
         }
 
-        if (!request.getNewPassword().equals(request.getConfirmationPassword())){
+        if (!request.newPassword().equals(request.confirmationPassword())){
             throw new IllegalStateException("Password are not the same");
         }
 
-        user.setPassword(passwordEncoder.encode(request.getNewPassword()));
+        user.setPassword(passwordEncoder.encode(request.newPassword()));
         repository.save(user);
     }
 
     @Override
     public Page<UserResponse> findByName(String name, Pageable pageable) {
         var users = repository.findByName(name, pageable);
-        return users.map(user -> UserResponse.builder()
-                .email(user.getEmail())
-                .firstName(user.getFirstName())
-                .lastname(user.getLastName())
-                .build());
+        return users.map(user -> new UserResponse(user.getEmail()
+                ,user.getFirstName()
+                ,user.getLastName())
+        );
+
     }
 
 }

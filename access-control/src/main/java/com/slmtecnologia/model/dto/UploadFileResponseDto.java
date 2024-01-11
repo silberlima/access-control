@@ -6,14 +6,10 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-public class UploadFileResponseDto implements Serializable {
-    private static final long serialVersionUID = 1L;
+public record UploadFileResponseDto(
+        String fileName
+        , String fileDownLoadUri
+        , String fileType
+        ,long size
+    ) implements Serializable {}
 
-    private String fileName;
-    private String fileDownLoadUri;
-    private String fileType;
-    private long size;
-}

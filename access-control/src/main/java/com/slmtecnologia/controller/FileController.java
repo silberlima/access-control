@@ -3,7 +3,6 @@ package com.slmtecnologia.controller;
 import com.slmtecnologia.model.dto.UploadFileResponseDto;
 import com.slmtecnologia.service.core.FileStorageService;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.annotation.Nullable;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;

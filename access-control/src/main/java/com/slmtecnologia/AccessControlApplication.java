@@ -21,7 +21,6 @@ public class AccessControlApplication {
 		SpringApplication.run(AccessControlApplication.class, args);
 	}
 
-
 	@Bean
 	public CommandLineRunner commandLineRunner(
 			AuthenticationService service
@@ -34,7 +33,7 @@ public class AccessControlApplication {
 					"admin@mail.com",
 					"password",
 					ADMIN);
-			log.info("Admin token: " + service.register(admin).getAccessToken());
+			log.info("Admin token: " + service.register(admin).accessToken());
 
 			var manager = new RegisterRequest(
 					"Person",
@@ -42,7 +41,7 @@ public class AccessControlApplication {
 					"person@mail.com",
 					"password",
 					PERSON);
-			log.info("Person token: " + service.register(manager).getAccessToken());
+			log.info("Person token: " + service.register(manager).accessToken());
 
 		};
 	}

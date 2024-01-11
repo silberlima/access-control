@@ -33,7 +33,9 @@ class PersonServiceTest {
     }
 
     private void createNewPerson(){
-        personEntity =  new Person("João", "00011122233", "joao@mail.com");
+        personEntity =  Person.builder()
+                .name("João")
+                .build();
     }
 
     @Test

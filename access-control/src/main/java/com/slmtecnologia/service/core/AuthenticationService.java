@@ -82,29 +82,24 @@ public class AuthenticationService {
         var jwtToken = jwtService.generateToken(user);
         var refreshToken = jwtService.generateRefreshToken(user);
         saveUserToken(savedUser, jwtToken);
-        return AuthenticationResponse.builder()
-                .accessToken(jwtToken)
-                .refreshToken(refreshToken)
-                .build();
+        return new AuthenticationResponse(jwtToken,refreshToken);
     }
 
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
-                        request.getEmail(),
-                        request.getPassword()
+                        request.email(),
+                        request.password()
                 )
         );
-        var user = repository.findByEmail(request.getEmail())
+        var user = repository.findByEmail(request.email())
                 .orElseThrow();
         var jwtToken = jwtService.generateToken(user);
         var jwtRefreshToken = jwtService.generateRefreshToken(user);
         revokeAllUserTokens(user);
         saveUserToken(user, jwtToken);
-        return AuthenticationResponse.builder()
-                .accessToken(jwtToken)
-                .refreshToken(jwtRefreshToken)
-                .build();
+        return new AuthenticationResponse(jwtToken,jwtRefreshToken);
+
     }
 
     public void refreshToken(
@@ -126,10 +121,8 @@ public class AuthenticationService {
                 var accessToken = jwtService.generateToken(user);
                 revokeAllUserTokens(user);
                 saveUserToken(user, accessToken);
-                var authResponse = AuthenticationResponse.builder()
-                        .accessToken(accessToken)
-                        .refreshToken(refreshToken)
-                        .build();
+                var authResponse = new AuthenticationResponse(accessToken,refreshToken);
+
                 new ObjectMapper().writeValue(response.getOutputStream(), authResponse);
             }
         }
@@ -149,7 +142,7 @@ public class AuthenticationService {
             throw new InvalidJwtAuthenticationException("Expired token");
         }
 
-        var user = repository.findByEmail(publicData.getEmail()).orElseThrow(() -> new ResourceNotFoundException("E-mail not found!"));
+        var user = repository.findByEmail(publicData.email()).orElseThrow(() -> new ResourceNotFoundException("E-mail not found!"));
 
         KeyBasedPersistenceTokenService tokenService = getInstanceFor(user);
         tokenService.verifyToken(rawToken);
@@ -159,7 +152,7 @@ public class AuthenticationService {
     }
 
     private boolean isExpired(PasswordTokenPublicData publicData) {
-        Instant createdAt = new Date(publicData.getCreatedAtTimestamp()).toInstant();
+        Instant createdAt = new Date(publicData.createdAtTimestamp()).toInstant();
         Instant now =new Date().toInstant();
         return createdAt.plus(Duration.ofMinutes(10)).isBefore(now);
     }

@@ -61,7 +61,7 @@ public class PersonControllerJsonTest extends AbstractIntegrationTest {
                             .extract()
                             .body()
                                 .as(AuthenticationResponse.class)
-                            .getAccessToken();
+                            .accessToken();
         specification = new RequestSpecBuilder()
                 .addHeader(TestConfigs.HEADER_PARAM_AUTHORIZATION, "Bearer "+accessToken)
                 .setBasePath(BASE_PATH)
