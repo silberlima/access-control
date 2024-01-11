@@ -1,15 +1,15 @@
 package com.slmtecnologia.service.core;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.slmtecnologia.controller.exceptions.InvalidJwtAuthenticationException;
-import com.slmtecnologia.controller.exceptions.ResourceNotFoundException;
+import com.slmtecnologia.exceptions.InvalidJwtAuthenticationException;
+import com.slmtecnologia.exceptions.ResourceNotFoundException;
 import com.slmtecnologia.model.dto.*;
 import com.slmtecnologia.model.entity.Token;
 import com.slmtecnologia.repository.TokenRepository;
 import com.slmtecnologia.model.enuns.TokenType;
 import com.slmtecnologia.model.entity.User;
 import com.slmtecnologia.repository.UserRepository;
-import com.slmtecnologia.controller.exceptions.RequiredObjectIsNullException;
+import com.slmtecnologia.exceptions.RequiredObjectIsNullException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;

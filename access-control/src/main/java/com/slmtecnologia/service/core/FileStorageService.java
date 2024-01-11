@@ -1,9 +1,8 @@
 package com.slmtecnologia.service.core;
 
 import com.slmtecnologia.config.FileStorageConfig;
-import com.slmtecnologia.controller.exceptions.FileStorageException;
-import com.slmtecnologia.controller.exceptions.MyFileNotFoundException;
-import jakarta.annotation.Nullable;
+import com.slmtecnologia.exceptions.FileStorageException;
+import com.slmtecnologia.exceptions.MyFileNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;

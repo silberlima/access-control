@@ -1,7 +1,7 @@
 package com.slmtecnologia.service.core;
 
-import com.slmtecnologia.controller.exceptions.RequiredObjectIsNullException;
-import com.slmtecnologia.controller.exceptions.ResourceNotFoundException;
+import com.slmtecnologia.exceptions.RequiredObjectIsNullException;
+import com.slmtecnologia.exceptions.ResourceNotFoundException;
 import com.slmtecnologia.model.dto.PersonDetailDto;
 import com.slmtecnologia.model.dto.PersonDto;
 import com.slmtecnologia.model.entity.City;
