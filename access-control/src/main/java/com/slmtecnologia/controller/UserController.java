@@ -72,10 +72,8 @@ public class UserController {
             @ApiResponse(description = "Internal Error", responseCode = "500", content = @Content),
     }
     )
-    public ResponseEntity<?> changePassword(@RequestBody ChangePasswordRequest request,
-                                            Principal connectedUser){
+    public ResponseEntity<?> changePassword(@RequestBody ChangePasswordRequest request, Principal connectedUser){
         userService.changePassword(request, connectedUser);
-
         return  ResponseEntity.accepted().build();
     }
 }

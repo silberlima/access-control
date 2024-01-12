@@ -1,6 +1,6 @@
 package com.slmtecnologia.controller;
 
-import com.slmtecnologia.model.dto.UploadFileResponseDto;
+import com.slmtecnologia.model.dto.UploadFileResponse;
 import com.slmtecnologia.service.core.FileStorageService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
@@ -30,18 +30,18 @@ public class FileController {
     private final FileStorageService service;
 
     @PostMapping("/uploadFile")
-    public UploadFileResponseDto uploadFile(@NotNull @Valid @RequestParam("file") MultipartFile file){
+    public UploadFileResponse uploadFile(@NotNull @Valid @RequestParam("file") MultipartFile file){
         var filename = service.storeFile(file);
         String fileDownloadUri = ServletUriComponentsBuilder
                 .fromCurrentContextPath()
                 .path("/api/file/downloadFile/")
                 .path(filename)
                 .toUriString();
-        return new UploadFileResponseDto(filename, fileDownloadUri, file.getContentType(), file.getSize());
+        return new UploadFileResponse(filename, fileDownloadUri, file.getContentType(), file.getSize());
     }
 
     @PostMapping("/uploadMultipleFile")
-    public List<UploadFileResponseDto> uploadMultipleFile(@RequestParam("files") MultipartFile[] files){
+    public List<UploadFileResponse> uploadMultipleFile(@RequestParam("files") MultipartFile[] files){
 
         return Arrays.asList(files)
                 .stream()

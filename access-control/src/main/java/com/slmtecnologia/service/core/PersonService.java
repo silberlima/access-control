@@ -2,7 +2,6 @@ package com.slmtecnologia.service.core;
 
 import com.slmtecnologia.exceptions.RequiredObjectIsNullException;
 import com.slmtecnologia.exceptions.ResourceNotFoundException;
-import com.slmtecnologia.model.dto.PersonDetailDto;
 import com.slmtecnologia.model.dto.PersonDto;
 import com.slmtecnologia.model.entity.City;
 import com.slmtecnologia.model.entity.Person;
@@ -34,13 +33,13 @@ public class PersonService implements IPersonService {
     }
     @Transactional
     @Override
-    public PersonDetailDto findById(Long id) {
-        return PersonMapper.entityToDetailDto(personRepository.findById(id)
+    public PersonDto findById(Long id) {
+        return PersonMapper.entityToDto(personRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException(RESOURCE_NOT_FOUND)));
     }
     @Transactional
     @Override
-    public PersonDetailDto createPerson(PersonDto personDto) {
+    public PersonDto createPerson(PersonDto personDto) {
         if(Objects.isNull(personDto)) throw new RequiredObjectIsNullException();
 
         Person person = PersonMapper.dtoToEntity(personDto);
@@ -51,13 +50,13 @@ public class PersonService implements IPersonService {
 
             person.setCity(city);
         }
-        return PersonMapper.entityToDetailDto(personRepository.save(person));
+        return PersonMapper.entityToDto(personRepository.save(person));
     }
 
 
     @Transactional
     @Override
-    public PersonDetailDto updatePerson(Long id, PersonDto updatedPersonDto) {
+    public PersonDto updatePerson(Long id, PersonDto updatedPersonDto) {
         var entity = personRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException(RESOURCE_NOT_FOUND));
 
@@ -73,7 +72,7 @@ public class PersonService implements IPersonService {
             personToSave.setCity(city);
         }
 
-        return PersonMapper.entityToDetailDto(personRepository.save(personToSave));
+        return PersonMapper.entityToDto(personRepository.save(personToSave));
     }
 
     @Transactional

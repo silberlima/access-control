@@ -1,6 +1,5 @@
 package com.slmtecnologia.model.mapper;
 
-import com.slmtecnologia.model.dto.PersonDetailDto;
 import com.slmtecnologia.model.dto.PersonDto;
 import com.slmtecnologia.model.entity.Person;
 
@@ -42,23 +41,6 @@ public class PersonMapper {
                 .street(dto.street())
                 .zipCode(dto.zipCode())
                 .build();
-    }
-
-    public static PersonDetailDto entityToDetailDto(Person entity){
-        if(Objects.isNull(entity)){ return null;}
-
-        return new PersonDetailDto(entity.getId(),
-                entity.getName(),
-                entity.getSocialName(),
-                entity.getFatherName(),
-                entity.getMotherName(),
-                entity.getCpf(),
-                entity.getBirthDate(),
-                entity.getEmail(),
-                entity.getStreet(),
-                Objects.nonNull(entity.getCity()) ? CityMapper.entityToDto(entity.getCity()) : null,
-                entity.getZipCode()
-        );
     }
 
     public static PersonDto entityToDto(Person entity){

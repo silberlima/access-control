@@ -1,6 +1,5 @@
 package com.slmtecnologia.controller;
 
-import com.slmtecnologia.model.dto.PersonDetailDto;
 import com.slmtecnologia.model.dto.PersonDto;
 import com.slmtecnologia.service.IPersonService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -76,7 +75,7 @@ public class PersonController {
         }
     )
     @PreAuthorize("hasAuthority('person:read')")
-    public ResponseEntity<PersonDetailDto> findById(@PathVariable Long id) {
+    public ResponseEntity<PersonDto> findById(@PathVariable Long id) {
         return new ResponseEntity<>(personService.findById(id), HttpStatus.OK);
     }
 
@@ -91,7 +90,7 @@ public class PersonController {
         }
     )
     @PreAuthorize("hasAuthority('person:create')")
-    public ResponseEntity<PersonDetailDto> createPerson(@RequestBody @Valid PersonDto personDto) {
+    public ResponseEntity<PersonDto> createPerson(@RequestBody @Valid PersonDto personDto) {
         return new ResponseEntity<>(personService.createPerson(personDto), HttpStatus.CREATED);
     }
 
@@ -107,7 +106,7 @@ public class PersonController {
         }
     )
     @PreAuthorize("hasAuthority('person:update')")
-    public ResponseEntity<PersonDetailDto> updatePerson(@PathVariable Long id, @RequestBody @Valid PersonDto updatedPersonDto) {
+    public ResponseEntity<PersonDto> updatePerson(@PathVariable Long id, @RequestBody @Valid PersonDto updatedPersonDto) {
         return new ResponseEntity<>(personService.updatePerson(id, updatedPersonDto), HttpStatus.OK);
     }
 
