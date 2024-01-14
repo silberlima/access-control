@@ -1,7 +1,6 @@
 package com.slmtecnologia.exceptions;
 
 
-import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -9,13 +8,10 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.context.request.WebRequest;
 
-import java.time.format.DateTimeParseException;
 import java.util.Date;
 import java.util.List;
-import java.util.zip.DataFormatException;
 
 @ControllerAdvice
 @RestController
