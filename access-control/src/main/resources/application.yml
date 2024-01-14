@@ -7,9 +7,10 @@ cors:
 file:
   upload-dir: /Users/silbersousalima/projects/access-control/access-control/UploadDir
 
+support:
+  mail: naoresponda@gmail.com
 # Spring Boot configuration
 spring:
-
   profiles:
     active: development
   # Database
@@ -34,6 +35,22 @@ spring:
       file-size-threshold: 2KB
       max-file-size: 200MB
       max-request-size: 215MB
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    test-connection: false
+    username: mycodereviewbr@gmail.com
+    password: viqbjsrwdtaexqtu
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+
+
+
 
 application:
   security:

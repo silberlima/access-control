@@ -1,14 +1,10 @@
 package com.slmtecnologia.model.dto;
 
-import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.Parameters;
 import io.swagger.v3.oas.annotations.media.Schema;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.validation.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
-
 
 public record PersonDto(
         @Schema(description = "Id do registro",name = "id",type = "Long",example = "10")

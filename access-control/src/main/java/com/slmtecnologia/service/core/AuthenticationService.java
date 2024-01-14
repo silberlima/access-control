@@ -2,19 +2,21 @@ package com.slmtecnologia.service.core;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.slmtecnologia.exceptions.InvalidJwtAuthenticationException;
+import com.slmtecnologia.exceptions.RequiredObjectIsNullException;
 import com.slmtecnologia.exceptions.ResourceNotFoundException;
 import com.slmtecnologia.model.dto.*;
 import com.slmtecnologia.model.entity.Token;
-import com.slmtecnologia.repository.TokenRepository;
-import com.slmtecnologia.model.enuns.TokenType;
 import com.slmtecnologia.model.entity.User;
+import com.slmtecnologia.model.enuns.TokenType;
+import com.slmtecnologia.repository.TokenRepository;
 import com.slmtecnologia.repository.UserRepository;
-import com.slmtecnologia.exceptions.RequiredObjectIsNullException;
+import jakarta.mail.MessagingException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -44,6 +46,11 @@ public class AuthenticationService {
     private final AuthenticationManager authenticationManager;
 
     private final TokenRepository tokenRepository;
+
+    private final EmailService emailService;
+
+    @Value("{$support.mail}")
+    private String supportMail;
 
     private void saveUserToken(User user, String jwtToken) {
         var token = Token.builder()
@@ -175,11 +182,28 @@ public class AuthenticationService {
 
     public void changeForgotPasswordSendEmail(EmailResetRequest input) {
 
+        String subject = "Reset de Senha";
+
         Optional<User> userOptional = repository.findByEmail(input.email());
         userOptional.ifPresent(user -> {
             String token = generateTokenFromPassword(user);
             log.info(token);
-            // send email
+            try {
+                EmailRequest emailRequest = new EmailRequest(supportMail, user.getEmail(), subject,  getTextMail(user.getFirstName(), token));
+                emailService.sendEmailToReset(emailRequest);
+            }catch (MessagingException e){
+                log.error(e.getMessage());
+            }
         });
+    }
+
+    public String getTextMail(String name, String url){
+        return "<html> "+
+                "   <body>"+
+                "       <h1>Olá "+name +"</h1>"+
+                "       <p>Segue abaixo o link para alterar sua senha:</p>"+
+                "       <br>"+url+
+                "   </body>"+
+                "</html>";
     }
 }

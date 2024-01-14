@@ -36,9 +36,9 @@ public class AccessControlApplication {
 			log.info("Admin token: " + service.register(admin).accessToken());
 
 			var manager = new RegisterRequest(
+					"Silber",
 					"Person",
-					"Person",
-					"person@mail.com",
+					"silber.lima@gmail.com",
 					"password",
 					PERSON);
 			log.info("Person token: " + service.register(manager).accessToken());
