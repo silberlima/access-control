@@ -1,5 +1,6 @@
-package com.slmtecnologia.controller;
+package com.slmtecnologia.controller.Impl;
 
+import com.slmtecnologia.controller.IAuthenticationController;
 import com.slmtecnologia.model.dto.*;
 import com.slmtecnologia.service.core.AuthenticationService;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -18,10 +19,11 @@ import java.io.IOException;
 @RequiredArgsConstructor
 @Slf4j
 @Tag(name = "Authentication", description = "Endpoints for Managing Authentications")
-public class AuthenticationController {
+public class AuthenticationController implements IAuthenticationController {
 
     private final AuthenticationService service;
 
+    @Override
     @PostMapping("/register")
     public ResponseEntity<AuthenticationResponse> register(
             @RequestBody RegisterRequest request
@@ -29,6 +31,7 @@ public class AuthenticationController {
         return ResponseEntity.ok(service.register(request));
     }
 
+    @Override
     @PostMapping("/authenticate")
     public ResponseEntity<AuthenticationResponse> authenticate(
             @RequestBody AuthenticationRequest request
@@ -36,6 +39,7 @@ public class AuthenticationController {
         return ResponseEntity.ok(service.authenticate(request));
     }
 
+    @Override
     @PostMapping("/refresh-token")
     public void refreshToken(
             HttpServletRequest request,
@@ -44,11 +48,13 @@ public class AuthenticationController {
         service.refreshToken(request, response);
     }
 
+    @Override
     @PostMapping("/forgot-password")
     public void forgotPassword(@RequestBody @Valid EmailResetRequest resetRequest){
         service.changeForgotPasswordSendEmail(resetRequest);
     }
 
+    @Override
     @PatchMapping("/update-forgot-password/{token}")
     public void updateForgotPassword(
             @PathVariable("token") String token,
@@ -59,4 +65,5 @@ public class AuthenticationController {
             log.error(e.getMessage());
         }
     }
+
 }

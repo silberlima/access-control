@@ -1,6 +1,8 @@
 package com.slmtecnologia.model.dto;
 
+import jakarta.validation.constraints.NotBlank;
+
 public record AuthenticationRequest(
-        String email,
-        String password
+        @NotBlank String email,
+        @NotBlank String password
     ) {}

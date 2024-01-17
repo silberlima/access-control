@@ -34,22 +34,31 @@ public class Person implements Serializable {
 
     @Column(nullable = false, length = 80)
     private String name;
+
     @Column(length = 80)
     private String socialName;
+
     @Column(length = 80)
     private String fatherName;
+
     @Column(length = 80)
     private String motherName;
+
     @Column(nullable = false, length = 11)
     private String cpf;
+
     @Column(length = 80)
     private LocalDate birthDate;
+
     @Column(nullable = false, length = 80)
     private String email;
+
     private String street;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cityId")
     private City city;
+
     private String zipCode;
 
     @CreatedDate

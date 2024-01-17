@@ -9,8 +9,8 @@ import org.springframework.stereotype.Service;
 public interface IPersonService {
     Page<PersonDto> findAll(Pageable pageable);
     PersonDto findById(Long id);
-    PersonDto createPerson(PersonDto personDto) ;
-    PersonDto updatePerson(Long id, PersonDto updatedPersonDto);
-    void deletePerson(Long id) ;
+    PersonDto create(PersonDto personDto) ;
+    PersonDto update(Long id, PersonDto updatedPersonDto);
+    void delete(Long id) ;
     Page<PersonDto> findByName(String name, Pageable pageable);
 }

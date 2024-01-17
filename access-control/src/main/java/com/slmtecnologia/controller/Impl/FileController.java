@@ -1,4 +1,4 @@
-package com.slmtecnologia.controller;
+package com.slmtecnologia.controller.Impl;
 
 import com.slmtecnologia.model.dto.UploadFileResponse;
 import com.slmtecnologia.service.core.FileStorageService;

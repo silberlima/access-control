@@ -13,7 +13,8 @@ public class StateMapper {
     }
 
     public static StateDto entityToDto(State entity){
-        return new StateDto(entity.getAcronym(),
+        return new StateDto(
+                entity.getAcronym(),
                 entity.getName());
     }
 }

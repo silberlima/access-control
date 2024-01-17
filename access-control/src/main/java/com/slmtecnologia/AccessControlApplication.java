@@ -30,7 +30,7 @@ public class AccessControlApplication {
 			var admin = new RegisterRequest(
 					"Admin",
 					"Admin",
-					"admin@mail.com",
+					"admin@gmail.com",
 					"password",
 					ADMIN);
 			log.info("Admin token: " + service.register(admin).accessToken());

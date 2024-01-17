@@ -1,7 +1,9 @@
 package com.slmtecnologia.model.dto;
 
+import jakarta.validation.constraints.NotBlank;
+
 public record ChangePasswordRequest(
-        String currentPassword,
-        String newPassword,
-        String confirmationPassword
+        @NotBlank String currentPassword,
+        @NotBlank String newPassword,
+        @NotBlank String confirmationPassword
     ){}

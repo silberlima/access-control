@@ -28,7 +28,19 @@ public enum Role {
                     Permission.USER_READ,
                     Permission.USER_UPDATE,
                     Permission.USER_DELETE,
-                    Permission.USER_CREATE
+                    Permission.USER_CREATE,
+                    Permission.PERMISSION_READ,
+                    Permission.PERMISSION_UPDATE,
+                    Permission.PERMISSION_DELETE,
+                    Permission.PERMISSION_CREATE,
+                    Permission.ROLE_READ,
+                    Permission.ROLE_UPDATE,
+                    Permission.ROLE_DELETE,
+                    Permission.ROLE_CREATE,
+                    Permission.APPLICATION_READ,
+                    Permission.APPLICATION_UPDATE,
+                    Permission.APPLICATION_DELETE,
+                    Permission.APPLICATION_CREATE
             )
     ),
     PERSON(

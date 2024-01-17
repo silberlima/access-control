@@ -48,10 +48,6 @@ spring:
           starttls:
             enable: true
             required: true
-
-
-
-
 application:
   security:
     jwt:

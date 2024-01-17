@@ -13,15 +13,16 @@ public class CityMapper {
         return new City(dto.id(),
                 dto.name(),
                 dto.ibgeCode(),
-                StateMapper.dtoToEntity(dto.state())
+                null
         );
     }
 
     public static CityDto entityToDto(City entity){
+
         return new CityDto(entity.getId(),
                 entity.getName(),
                 entity.getIbgeCode(),
-                Objects.nonNull(entity.getState()) ? StateMapper.entityToDto(entity.getState()) : null
+                Objects.nonNull(entity.getState()) ? entity.getState().getAcronym(): null
         );
     }
 }

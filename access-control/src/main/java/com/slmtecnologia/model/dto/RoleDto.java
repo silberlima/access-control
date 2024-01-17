@@ -2,9 +2,9 @@ package com.slmtecnologia.model.dto;
 
 import jakarta.validation.constraints.NotBlank;
 
-public record CityDto(
+public record RoleDto(
         Long id,
         @NotBlank String name,
-        @NotBlank String ibgeCode,
-        @NotBlank String stateAcronym
+        @NotBlank String description,
+        Long applicationId
     ) {}
