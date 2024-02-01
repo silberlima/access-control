@@ -13,6 +13,7 @@ import com.slmtecnologia.repository.RoleRepository;
 import com.slmtecnologia.repository.UserRepository;
 import com.slmtecnologia.service.IUserService;
 import jakarta.mail.MessagingException;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
@@ -37,6 +38,11 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class UserService implements IUserService {
 
+    public static final String USER_ALREADY_EXISTS = "User already exists";
+    public static final String ROLE_NOT_FOUND = "Role not found";
+    public static final String PASSWORD_ARE_NOT_THE_SAME = "Password are not the same";
+    public static final String WRONG_PASSWORD = "Wrong password";
+
     private final PasswordEncoder passwordEncoder;
 
     private final UserRepository repository;
@@ -53,11 +59,11 @@ public class UserService implements IUserService {
         var user = (User)((UsernamePasswordAuthenticationToken) connectedUser).getPrincipal();
 
         if(passwordEncoder.matches(passwordEncoder.encode(request.currentPassword()), user.getPassword())){
-            throw new IllegalStateException("Wrong password");
+            throw new IllegalStateException(WRONG_PASSWORD);
         }
 
         if (!request.newPassword().equals(request.confirmationPassword())){
-            throw new IllegalStateException("Password are not the same");
+            throw new IllegalStateException(PASSWORD_ARE_NOT_THE_SAME);
         }
 
         user.setPassword(passwordEncoder.encode(request.newPassword()));
@@ -74,16 +80,18 @@ public class UserService implements IUserService {
     }
 
     @Override
+    @Transactional
     public UserDto create(UserDto dto) {
 
         if(repository.findByEmail(dto.email()).isPresent()){
-            throw new RequiredObjectIsNullException("User already exists");
+            throw new RequiredObjectIsNullException(USER_ALREADY_EXISTS);
         }
 
         Set<Role> roles = dto.roleIds()
                 .stream()
-                .map(roleId -> roleRepository.findById(roleId).orElseThrow(() -> new ResourceNotFoundException("Role not found")))
+                .map(roleId -> roleRepository.findById(roleId).orElseThrow(() -> new ResourceNotFoundException(ROLE_NOT_FOUND)))
                 .collect(Collectors.toSet());
+
         User user = UserMapper.dtoToEntity(dto);
         String temporaryPassword = String.format("%06d", (int) (Math.random() * 1000000));
         user.setPassword(passwordEncoder.encode(temporaryPassword));
@@ -100,15 +108,6 @@ public class UserService implements IUserService {
         return UserMapper.entityToDto(repository.save(user));
     }
 
-    public String readHtmlFile(String fileName) throws IOException {
-        Resource resource = resourceLoader.getResource("classpath:seuarquivo.html");
-        this.getClass().getClassLoader().getResourceAsStream(fileName);
-
-        try (InputStream inputStream = resource.getInputStream()) {
-            byte[] bytes = StreamUtils.copyToByteArray(inputStream);
-            return new String(bytes, StandardCharsets.UTF_8);
-        }
-    }
     public String getTextMail(String name, String temporaryPassword){
         return "<html> "+
                 "   <body>"+

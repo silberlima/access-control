@@ -17,7 +17,7 @@ import java.util.List;
 @ControllerAdvice
 @RestController
 public class CustomizedResponseEntityExceptionHandler {
-/*
+
     @ExceptionHandler(Exception.class)
     public final ResponseEntity<ExceptionResponse> handleAllExceptions(Exception ex, WebRequest request){
         ExceptionResponse exceptionResponse = new ExceptionResponse(new Date()
@@ -26,7 +26,7 @@ public class CustomizedResponseEntityExceptionHandler {
                 );
         return new ResponseEntity<>(exceptionResponse, HttpStatus.INTERNAL_SERVER_ERROR);
     }
-*/
+
     @ExceptionHandler(AccessDeniedException.class)
     public final ResponseEntity<ExceptionResponse> accessDeniedExceptions(Exception ex, WebRequest request){
         ExceptionResponse exceptionResponse = new ExceptionResponse(new Date()

@@ -52,7 +52,6 @@ public class PersonService implements IPersonService {
         return PersonMapper.entityToDto(personRepository.save(entity));
     }
 
-
     @Transactional
     @Override
     public PersonDto update(Long id, PersonDto dto) {

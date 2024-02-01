@@ -4,6 +4,7 @@ import com.slmtecnologia.exceptions.RequiredObjectIsNullException;
 import com.slmtecnologia.exceptions.ResourceNotFoundException;
 import com.slmtecnologia.model.dto.PermissionDto;
 import com.slmtecnologia.model.entity.Permission;
+import com.slmtecnologia.model.entity.Role;
 import com.slmtecnologia.model.mapper.PermissionMapper;
 import com.slmtecnologia.model.mapper.RoleMapper;
 import com.slmtecnologia.repository.PermissionRepository;
@@ -16,6 +17,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
