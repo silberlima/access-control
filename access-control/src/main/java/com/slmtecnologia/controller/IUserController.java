@@ -1,6 +1,8 @@
 package com.slmtecnologia.controller;
 
 import com.slmtecnologia.model.dto.ChangePasswordRequest;
+import com.slmtecnologia.model.dto.PersonDto;
+import com.slmtecnologia.model.dto.UserDto;
 import com.slmtecnologia.model.dto.UserResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -47,5 +49,17 @@ public interface IUserController {
             @ApiResponse(description = "Not Found", responseCode = "404", content = @Content),
             @ApiResponse(description = "Internal Error", responseCode = "500", content = @Content),
     })
+    @PreAuthorize("hasAuthority('user:update')")
     ResponseEntity<?> changePassword(ChangePasswordRequest request, Principal connectedUser);
+
+    @Operation(summary = "Add a new User", description = "Add a new a User",
+            tags = {TAG}, responses = {
+            @ApiResponse(description = "Success", responseCode = "200",content = @Content(schema = @Schema(implementation = PersonDto.class))),
+            @ApiResponse(description = "Bad Request", responseCode = "400", content = @Content),
+            @ApiResponse(description = "Unauthorized", responseCode = "401", content = @Content),
+            @ApiResponse(description = "Internal Error", responseCode = "500", content = @Content),
+    }
+    )
+    @PreAuthorize("hasAuthority('user:create')")
+    ResponseEntity<UserDto> create(UserDto userDto);
 }

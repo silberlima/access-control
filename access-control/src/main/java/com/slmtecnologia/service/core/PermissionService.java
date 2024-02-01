@@ -43,11 +43,6 @@ public class PermissionService implements IPermissionService {
 
         Permission entity = PermissionMapper.dtoToEntity(dto);
 
-        if(Objects.nonNull(dto.roleId())){
-            var roleDto = roleService.findById(dto.roleId());
-            entity.setRole(RoleMapper.dtoToEntity(roleDto));
-        }
-
         return PermissionMapper.entityToDto(repository.save(entity));
     }
 
@@ -58,11 +53,6 @@ public class PermissionService implements IPermissionService {
                 .orElseThrow(() -> new ResourceNotFoundException(RESOURCE_NOT_FOUND));
 
         var entityToSave = PermissionMapper.dtoToEntity(entity, dto);
-
-        if(Objects.nonNull(dto.roleId())){
-            var roleDto = roleService.findById(dto.roleId());
-            entityToSave.setRole(RoleMapper.dtoToEntity(roleDto));
-        }
 
         return PermissionMapper.entityToDto(repository.save(entityToSave));
     }

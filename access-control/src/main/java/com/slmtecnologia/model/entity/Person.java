@@ -28,7 +28,7 @@ public class Person implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @Column(name = "personId")
+    @Column(name = "person_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -56,7 +56,7 @@ public class Person implements Serializable {
     private String street;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "cityId")
+    @JoinColumn(name = "city_id")
     private City city;
 
     private String zipCode;

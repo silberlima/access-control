@@ -2,8 +2,10 @@ package com.slmtecnologia.controller.Impl;
 
 import com.slmtecnologia.controller.IUserController;
 import com.slmtecnologia.model.dto.ChangePasswordRequest;
+import com.slmtecnologia.model.dto.UserDto;
 import com.slmtecnologia.model.dto.UserResponse;
 import com.slmtecnologia.service.IUserService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -43,4 +45,11 @@ public class UserController implements IUserController {
         service.changePassword(request, connectedUser);
         return  ResponseEntity.accepted().build();
     }
+
+    @Override
+    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<UserDto> create(@RequestBody @Valid UserDto userDto) {
+        return new ResponseEntity<>(service.create(userDto), HttpStatus.CREATED);
+    }
+
 }

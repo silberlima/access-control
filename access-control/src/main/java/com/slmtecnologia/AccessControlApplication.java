@@ -1,16 +1,13 @@
 package com.slmtecnologia;
 
-import com.slmtecnologia.service.core.AuthenticationService;
 import com.slmtecnologia.model.dto.RegisterRequest;
+import com.slmtecnologia.service.core.AuthenticationService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
-
-import static com.slmtecnologia.model.enuns.Role.ADMIN;
-import static com.slmtecnologia.model.enuns.Role.PERSON;
 
 @SpringBootApplication
 @Slf4j
@@ -31,17 +28,8 @@ public class AccessControlApplication {
 					"Admin",
 					"Admin",
 					"admin@gmail.com",
-					"password",
-					ADMIN);
+					"password");
 			log.info("Admin token: " + service.register(admin).accessToken());
-
-			var manager = new RegisterRequest(
-					"Silber",
-					"Person",
-					"silber.lima@gmail.com",
-					"password",
-					PERSON);
-			log.info("Person token: " + service.register(manager).accessToken());
 
 		};
 	}

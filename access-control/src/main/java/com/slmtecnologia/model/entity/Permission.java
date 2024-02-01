@@ -18,7 +18,7 @@ public class Permission implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @Column(name = "permissionId")
+    @Column(name = "permission_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -27,8 +27,4 @@ public class Permission implements Serializable {
 
     @Column
     private String description;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "roleId")
-    private Role role;
 }

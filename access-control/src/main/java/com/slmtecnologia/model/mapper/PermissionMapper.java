@@ -34,8 +34,7 @@ public class PermissionMapper {
 
         return new PermissionDto(entity.getId(),
                 entity.getName(),
-                entity.getDescription(),
-                Objects.nonNull(entity.getRole()) ? entity.getRole().getId() : null
+                entity.getDescription()
         );
     }
 

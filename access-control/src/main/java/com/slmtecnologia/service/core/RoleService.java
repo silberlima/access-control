@@ -42,11 +42,6 @@ public class RoleService implements IRoleService {
 
         var entity = RoleMapper.dtoToEntity(dto);
 
-        if(Objects.nonNull(dto.applicationId())){
-            var appDto = applicationService.findById(dto.applicationId());
-            entity.setApplication(ApplicationMapper.dtoToEntity(appDto));
-        }
-
         return RoleMapper.entityToDto(repository.save(entity));
     }
 
@@ -57,11 +52,6 @@ public class RoleService implements IRoleService {
                 .orElseThrow(() -> new ResourceNotFoundException(RESOURCE_NOT_FOUND));
 
         var entityToSave = RoleMapper.dtoToEntity(entity, dto);
-
-        if(Objects.nonNull(dto.applicationId())){
-            var appDto = applicationService.findById(dto.applicationId());
-            entityToSave.setApplication(ApplicationMapper.dtoToEntity(appDto));
-        }
 
         return RoleMapper.entityToDto(repository.save(entityToSave));
     }

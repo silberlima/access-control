@@ -19,7 +19,7 @@ public class Application implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @Column(name = "applicationId")
+    @Column(name = "application_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 

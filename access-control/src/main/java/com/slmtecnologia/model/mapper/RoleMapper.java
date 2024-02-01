@@ -34,8 +34,7 @@ public class RoleMapper {
 
         return new RoleDto(entity.getId(),
                 entity.getName(),
-                entity.getDescription(),
-                Objects.nonNull(entity.getApplication()) ? entity.getApplication().getId() : null
+                entity.getDescription()
         );
     }
 

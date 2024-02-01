@@ -18,7 +18,7 @@ import java.io.Serializable;
 public class City implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @Column(name = "cityId")
+    @Column(name = "city_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 

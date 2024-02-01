@@ -1,6 +1,7 @@
 package com.slmtecnologia.service.core;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.slmtecnologia.exceptions.BadCredentialsException;
 import com.slmtecnologia.exceptions.InvalidJwtAuthenticationException;
 import com.slmtecnologia.exceptions.RequiredObjectIsNullException;
 import com.slmtecnologia.exceptions.ResourceNotFoundException;
@@ -24,6 +25,7 @@ import org.springframework.security.core.token.KeyBasedPersistenceTokenService;
 import org.springframework.security.core.token.SecureRandomFactoryBean;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
 
 import java.io.IOException;
 import java.time.Duration;
@@ -36,6 +38,10 @@ import java.util.Optional;
 @Slf4j
 @RequiredArgsConstructor
 public class AuthenticationService {
+
+    public static final String MESSAGE_WRONG_ACCESS = "Wrong username or password.";
+    public static final String MESSAGE_USER_EXISTS = "User already exists";
+    public static final String MESSAGE_EMAIL_NOT_FOUND = "E-mail not found!";
 
     private final UserRepository repository;
 
@@ -75,15 +81,17 @@ public class AuthenticationService {
     }
 
     public AuthenticationResponse register(RegisterRequest request) {
+
+
         var user = User.builder()
                 .firstName(request.firstName())
                 .lastName(request.lastname())
                 .email(request.email())
                 .password(passwordEncoder.encode(request.password()))
-                .role(request.role())
                 .build();
+
         if(repository.findByEmail(user.getEmail()).isPresent()){
-            throw new RequiredObjectIsNullException("User already exists");
+            throw new RequiredObjectIsNullException(MESSAGE_USER_EXISTS);
         }
         var savedUser = repository.save(user);
         var jwtToken = jwtService.generateToken(user);
@@ -93,12 +101,16 @@ public class AuthenticationService {
     }
 
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
-        authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        request.email(),
-                        request.password()
-                )
-        );
+        try {
+            authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(
+                            request.email(),
+                            request.password()
+                    ));
+        }catch (RuntimeException e){
+            throw new BadCredentialsException(MESSAGE_WRONG_ACCESS);
+
+        }
         var user = repository.findByEmail(request.email())
                 .orElseThrow();
         var jwtToken = jwtService.generateToken(user);
@@ -149,7 +161,7 @@ public class AuthenticationService {
             throw new InvalidJwtAuthenticationException("Expired token");
         }
 
-        var user = repository.findByEmail(publicData.email()).orElseThrow(() -> new ResourceNotFoundException("E-mail not found!"));
+        var user = repository.findByEmail(publicData.email()).orElseThrow(() -> new ResourceNotFoundException(MESSAGE_EMAIL_NOT_FOUND));
 
         KeyBasedPersistenceTokenService tokenService = getInstanceFor(user);
         tokenService.verifyToken(rawToken);
