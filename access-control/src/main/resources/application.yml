@@ -3,7 +3,7 @@ server:
   port: 8080 #set your port
 
 cors:
-  originPatterns: http://localhost:3000,http://localhost:8080
+  originPatterns: http://localhost:3000,http://localhost:8080,http://localhost:4200
 file:
   upload-dir: /Users/silbersousalima/projects/access-control/access-control/UploadDir
 

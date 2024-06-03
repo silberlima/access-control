@@ -22,7 +22,7 @@ public class Token implements Serializable {
     @GeneratedValue
     public Integer id;
 
-    @Column(unique = true)
+    @Column(unique = true, columnDefinition = "varchar(1000)")
     public String token;
 
     @Enumerated(EnumType.STRING)

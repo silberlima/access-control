@@ -12,6 +12,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -44,10 +45,14 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return roles.stream()
-                .flatMap(role -> role.getPermissions().stream())
-                .map(permission -> new SimpleGrantedAuthority(permission.getName()))
-                .collect(Collectors.toList());
+        Collection<? extends GrantedAuthority> r = null;
+        if (Objects.nonNull(roles)){
+            r = roles.stream()
+                    .flatMap(role -> role.getPermissions().stream())
+                    .map(permission -> new SimpleGrantedAuthority(permission.getName()))
+                    .collect(Collectors.toList());
+        }
+        return r;
     }
 
     @Override
