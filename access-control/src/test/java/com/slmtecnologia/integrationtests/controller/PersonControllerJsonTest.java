@@ -47,7 +47,7 @@ public class PersonControllerJsonTest extends AbstractIntegrationTest {
     @Test
     @Order(0)
     void authorization() throws JsonProcessingException {
-        AuthenticationRequest user = new AuthenticationRequest("person@mail.com", "passoword");
+        AuthenticationRequest user = new AuthenticationRequest("person@mail.com", "passoword", 1L);
 
         var accessToken = given()
                 .basePath("api/auth/authenticate")

@@ -26,7 +26,7 @@ public class AuthenticationController implements IAuthenticationController {
     @Override
     @PostMapping("/register")
     public ResponseEntity<AuthenticationResponse> register(
-            @RequestBody RegisterRequest request
+            @RequestBody @Valid RegisterRequest request
     ){
         return ResponseEntity.ok(service.register(request));
     }
@@ -34,7 +34,7 @@ public class AuthenticationController implements IAuthenticationController {
     @Override
     @PostMapping("/authenticate")
     public ResponseEntity<AuthenticationResponse> authenticate(
-            @RequestBody AuthenticationRequest request
+            @RequestBody @Valid AuthenticationRequest request
     ){
         return ResponseEntity.ok(service.authenticate(request));
     }

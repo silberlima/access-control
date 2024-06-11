@@ -25,4 +25,7 @@ public class Application implements Serializable {
 
     @Column
     private String name;
+
+    @Column
+    private Long appCode;
 }

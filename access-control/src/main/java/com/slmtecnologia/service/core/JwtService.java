@@ -61,7 +61,6 @@ public class JwtService {
             String strAuthorities = authorities.stream()
                     .map(GrantedAuthority::getAuthority)
                     .collect(Collectors.joining(", ", "[", "]"));
-
             extraClaims.put("Authorities", strAuthorities);
         }
 

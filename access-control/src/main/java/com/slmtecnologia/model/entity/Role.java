@@ -34,6 +34,12 @@ public class Role implements GrantedAuthority {
             joinColumns = @JoinColumn(name = "role_id"),
             inverseJoinColumns = @JoinColumn(name = "permission_id"))
     private Set<Permission> permissions;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "role_application",
+            joinColumns = @JoinColumn(name = "role_id"),
+            inverseJoinColumns = @JoinColumn(name = "application_id"))
+    private Set<Application> applications;
     @Override
     public String getAuthority() {
         return name;

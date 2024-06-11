@@ -6,6 +6,8 @@ import com.slmtecnologia.exceptions.InvalidJwtAuthenticationException;
 import com.slmtecnologia.exceptions.RequiredObjectIsNullException;
 import com.slmtecnologia.exceptions.ResourceNotFoundException;
 import com.slmtecnologia.model.dto.*;
+import com.slmtecnologia.model.entity.Application;
+import com.slmtecnologia.model.entity.Role;
 import com.slmtecnologia.model.entity.Token;
 import com.slmtecnologia.model.entity.User;
 import com.slmtecnologia.model.enuns.TokenType;
@@ -25,7 +27,6 @@ import org.springframework.security.core.token.KeyBasedPersistenceTokenService;
 import org.springframework.security.core.token.SecureRandomFactoryBean;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.HttpClientErrorException;
 
 import java.io.IOException;
 import java.time.Duration;
@@ -42,6 +43,7 @@ public class AuthenticationService {
     public static final String MESSAGE_WRONG_ACCESS = "Wrong username or password.";
     public static final String MESSAGE_USER_EXISTS = "User already exists";
     public static final String MESSAGE_EMAIL_NOT_FOUND = "E-mail not found!";
+    public static final String NO_APPLICATION_ACCESS = "User does not have permission to this application.";
 
     private final UserRepository repository;
 
@@ -108,11 +110,12 @@ public class AuthenticationService {
                             request.password()
                     ));
         }catch (RuntimeException e){
-            throw new BadCredentialsException(MESSAGE_WRONG_ACCESS);
+            throw new BadCredentialsException(MESSAGE_WRONG_ACCESS);       }
 
-        }
-        var user = repository.findByEmail(request.email())
-                .orElseThrow();
+
+        var user = repository.findByEmailAndCodApp(request.email(), request.appCode())
+                .orElseThrow(()-> new ResourceNotFoundException(NO_APPLICATION_ACCESS));
+        
         var jwtToken = jwtService.generateToken(user);
         var jwtRefreshToken = jwtService.generateRefreshToken(user);
         revokeAllUserTokens(user);

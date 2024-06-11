@@ -9,18 +9,21 @@ public class ApplicationMapper {
 
     public static Application dtoToEntity(ApplicationDto dto){
         return new Application(dto.id(),
-                dto.name());
+                dto.name(),
+                dto.appCode());
     }
 
     public static Application dtoToEntity(Application application,ApplicationDto dto){
         return new Application(application.getId(),
-                dto.name());
+                dto.name(),
+                dto.appCode());
     }
 
 
     public static ApplicationDto entityToDto(Application entity){
         return new ApplicationDto(entity.getId(),
-                entity.getName()
+                entity.getName(),
+                entity.getAppCode()
         );
     }
 }
